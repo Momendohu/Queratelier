@@ -16,18 +16,7 @@ public class ItemInventory : MonoBehaviour {
     private Vector3 amountOfCloseMovement = new Vector3(0,-200,0); //閉じるときの移動量
     private float movingSpeed = 0.1f; //移動スピード
 
-    //=============================================================
-    //一度だけ起動する形フラグ
-    private bool openingOnce = false;
-    private bool closingOnce = false;
-
-    /// <summary>
-    ///一度だけ起動する系フラグの初期化 
-    /// </summary>
-    private void OnceFlagInitialize () {
-        openingOnce = false;
-        closingOnce = false;
-    }
+    private bool onceSwitchIndex = false; //指示してるボックスが変更された時いちどだけ呼び出すフラグ
 
     //=============================================================
     //インベントリの状態
@@ -41,7 +30,7 @@ public class ItemInventory : MonoBehaviour {
     }
     private EventState eventState = EventState.CLOSE_WAIT;
 
-    //指示してる場所のid
+    //指示してるボックスのid
     private enum IndexID {
         MIX = 0,
         BASE1 = 1,
@@ -56,14 +45,15 @@ public class ItemInventory : MonoBehaviour {
     //=============================================================
     private void Init () {
         //参照をとる
-        mixObj = transform.Find("Mix/Frame/M").gameObject;
+        mixObj = transform.Find("Mix/Frame/M/Focus").gameObject;
         for(int i = 0;i < baseObj.Length;i++) {
-            baseObj[i] = GameObject.Find("Base/Frame/B" + i);
+            baseObj[i] = GameObject.Find("Base/Frame/B" + (i + 1) + "/Focus");
         }
     }
 
     private void Awake () {
         Init();
+        BoxObjInitialize();
     }
 
     private void Start () {
@@ -79,39 +69,84 @@ public class ItemInventory : MonoBehaviour {
 
         switch(eventState) {
             case EventState.CLOSE_WAIT:
-            StartOpening();
+            if(InputModule.IsPushButtonDown(KeyCode.Space)) {
+                StartOpening();
+            }
             break;
 
             case EventState.OPENING:
-            OnceFlagInitialize();
-
-            //インベントリが開ききったかの確認
-            if(currentPos.sqrMagnitude == (basePos + amountOfOpenMovement).sqrMagnitude) {
-                eventState = EventState.OPEN_WAIT;
-            }
+            if(IsCompletedOpening()) eventState = EventState.OPEN_WAIT;
             break;
 
             case EventState.OPEN_WAIT:
-            StartClosing();
+            ShiftIndex();
+
+            if(InputModule.IsPushButtonDown(KeyCode.Space)) {
+                StartClosing();
+            }
+
+            //指示してるボックスに応じて処理を行う
+            switch(indexID) {
+                case IndexID.MIX:
+                if(!onceSwitchIndex) {
+                    BoxObjInitialize();
+                    mixObj.SetActive(true);
+                    onceSwitchIndex = true;
+                }
+
+                break;
+
+                case IndexID.BASE1:
+                if(!onceSwitchIndex) {
+                    BoxObjInitialize();
+                    baseObj[0].SetActive(true);
+                    onceSwitchIndex = true;
+                }
+                break;
+
+                case IndexID.BASE2:
+                if(!onceSwitchIndex) {
+                    BoxObjInitialize();
+                    baseObj[1].SetActive(true);
+                    onceSwitchIndex = true;
+                }
+                break;
+
+                case IndexID.BASE3:
+                if(!onceSwitchIndex) {
+                    BoxObjInitialize();
+                    baseObj[2].SetActive(true);
+                    onceSwitchIndex = true;
+                }
+                break;
+
+                case IndexID.BASE4:
+                if(!onceSwitchIndex) {
+                    BoxObjInitialize();
+                    baseObj[3].SetActive(true);
+                    onceSwitchIndex = true;
+                }
+                break;
+
+                default:
+                break;
+            }
             break;
 
             case EventState.CLOSING:
-            OnceFlagInitialize();
-
-            //インベントリが閉じきったかの確認
-            if(currentPos.sqrMagnitude == basePos.sqrMagnitude) {
-                eventState = EventState.CLOSE_WAIT;
-            }
+            if(IsCompletedClosing()) eventState = EventState.CLOSE_WAIT;
             break;
 
             default:
             break;
         }
 
-        Debug.Log(eventState);
+        //Debug.Log(eventState);
 
         //位置の更新
-        GetComponent<RectTransform>().localPosition = currentPos;
+        if(currentPos.sqrMagnitude != 0) {
+            GetComponent<RectTransform>().localPosition = currentPos;
+        }
     }
 
     //=============================================================
@@ -119,14 +154,10 @@ public class ItemInventory : MonoBehaviour {
     /// インベントリを開く動作を開始
     /// </summary>
     private void StartOpening () {
-        //一回だけ処理
-        if(!openingOnce) {
-            Vector3 pos = GetComponent<RectTransform>().localPosition;
-            ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfOpenMovement,movingSpeed);
-            StartCoroutine(ien);
-            eventState = EventState.OPENING;
-            openingOnce = true;
-        }
+        Vector3 pos = GetComponent<RectTransform>().localPosition;
+        ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfOpenMovement,movingSpeed);
+        StartCoroutine(ien);
+        eventState = EventState.OPENING;
     }
 
     //=============================================================
@@ -134,13 +165,72 @@ public class ItemInventory : MonoBehaviour {
     /// インベントリを閉じる動作を開始
     /// </summary>
     private void StartClosing () {
-        //一度だけ処理
-        if(!closingOnce) {
-            Vector3 pos = GetComponent<RectTransform>().localPosition;
-            ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfCloseMovement,movingSpeed);
-            StartCoroutine(ien);
-            eventState = EventState.CLOSING;
-            closingOnce = true;
+        Vector3 pos = GetComponent<RectTransform>().localPosition;
+        ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfCloseMovement,movingSpeed);
+        StartCoroutine(ien);
+        eventState = EventState.CLOSING;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// インベントリが完全に開いたか
+    /// </summary>
+    private bool IsCompletedOpening () {
+        if(currentPos.sqrMagnitude == (basePos + amountOfOpenMovement).sqrMagnitude) {
+            return true;
+        }
+
+        return false;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// インベントリが完全に閉じたか
+    /// </summary>
+    private bool IsCompletedClosing () {
+        if(currentPos.sqrMagnitude == basePos.sqrMagnitude) {
+            return true;
+        }
+
+        return false;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// 指示してるボックスを変更する
+    /// </summary>
+    private void ShiftIndex () {
+        if(InputModule.IsPushButtonDown(KeyCode.LeftArrow) || InputModule.IsPushButtonDown(KeyCode.A)) {
+            //フラグの初期化
+            onceSwitchIndex = false;
+
+            //指示してるボックスの変更
+            indexID--;
+            if(indexID < 0) {
+                indexID = IndexID.SIZE - 1;
+            }
+        }
+
+        if(InputModule.IsPushButtonDown(KeyCode.RightArrow) || InputModule.IsPushButtonDown(KeyCode.D)) {
+            //フラグの初期化
+            onceSwitchIndex = false;
+
+            //指示してるボックスの変更
+            indexID++;
+            if(indexID > IndexID.SIZE - 1) {
+                indexID = IndexID.MIX;
+            }
+        }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// インベントリボックスのアクティブ初期化
+    /// </summary>
+    private void BoxObjInitialize () {
+        mixObj.SetActive(false);
+        for(int i = 0;i < baseObj.Length;i++) {
+            baseObj[i].SetActive(false);
         }
     }
 }
