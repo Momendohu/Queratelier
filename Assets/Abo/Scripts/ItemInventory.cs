@@ -4,6 +4,9 @@ using UnityEngine;
 //using UnityEngine.UI;
 
 public class ItemInventory : MonoBehaviour {
+    private GameObject mixObj;
+    private GameObject[] baseObj = new GameObject[4];
+
     //=============================================================
     private IEnumerator ien;
 
@@ -52,6 +55,11 @@ public class ItemInventory : MonoBehaviour {
 
     //=============================================================
     private void Init () {
+        //参照をとる
+        mixObj = transform.Find("Mix/Frame/M").gameObject;
+        for(int i = 0;i < baseObj.Length;i++) {
+            baseObj[i] = GameObject.Find("Base/Frame/B" + i);
+        }
     }
 
     private void Awake () {
