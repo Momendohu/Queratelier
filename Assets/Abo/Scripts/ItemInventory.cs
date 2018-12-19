@@ -79,58 +79,39 @@ public class ItemInventory : MonoBehaviour {
             break;
 
             case EventState.OPEN_WAIT:
+
+            //指示してるボックスに応じて処理を行う
+            switch(indexID) {
+                case IndexID.MIX:
+                BoxObjSwitchActivate(mixObj);
+                break;
+
+                case IndexID.BASE1:
+                BoxObjSwitchActivate(baseObj[0]);
+                break;
+
+                case IndexID.BASE2:
+                BoxObjSwitchActivate(baseObj[1]);
+                break;
+
+                case IndexID.BASE3:
+                BoxObjSwitchActivate(baseObj[2]);
+                break;
+
+                case IndexID.BASE4:
+                BoxObjSwitchActivate(baseObj[3]);
+                break;
+
+                default:
+                break;
+            }
+
             ShiftIndex();
 
             if(InputModule.IsPushButtonDown(KeyCode.Space)) {
                 StartClosing();
             }
 
-            //指示してるボックスに応じて処理を行う
-            switch(indexID) {
-                case IndexID.MIX:
-                if(!onceSwitchIndex) {
-                    BoxObjInitialize();
-                    mixObj.SetActive(true);
-                    onceSwitchIndex = true;
-                }
-
-                break;
-
-                case IndexID.BASE1:
-                if(!onceSwitchIndex) {
-                    BoxObjInitialize();
-                    baseObj[0].SetActive(true);
-                    onceSwitchIndex = true;
-                }
-                break;
-
-                case IndexID.BASE2:
-                if(!onceSwitchIndex) {
-                    BoxObjInitialize();
-                    baseObj[1].SetActive(true);
-                    onceSwitchIndex = true;
-                }
-                break;
-
-                case IndexID.BASE3:
-                if(!onceSwitchIndex) {
-                    BoxObjInitialize();
-                    baseObj[2].SetActive(true);
-                    onceSwitchIndex = true;
-                }
-                break;
-
-                case IndexID.BASE4:
-                if(!onceSwitchIndex) {
-                    BoxObjInitialize();
-                    baseObj[3].SetActive(true);
-                    onceSwitchIndex = true;
-                }
-                break;
-
-                default:
-                break;
-            }
             break;
 
             case EventState.CLOSING:
@@ -154,6 +135,7 @@ public class ItemInventory : MonoBehaviour {
     /// インベントリを開く動作を開始
     /// </summary>
     private void StartOpening () {
+        //モーション処理
         Vector3 pos = GetComponent<RectTransform>().localPosition;
         ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfOpenMovement,movingSpeed);
         StartCoroutine(ien);
@@ -165,6 +147,12 @@ public class ItemInventory : MonoBehaviour {
     /// インベントリを閉じる動作を開始
     /// </summary>
     private void StartClosing () {
+        //インベントリ操作の初期化
+        onceSwitchIndex = false;
+        BoxObjInitialize();
+        indexID = IndexID.MIX;
+
+        //モーション処理
         Vector3 pos = GetComponent<RectTransform>().localPosition;
         ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfCloseMovement,movingSpeed);
         StartCoroutine(ien);
@@ -231,6 +219,18 @@ public class ItemInventory : MonoBehaviour {
         mixObj.SetActive(false);
         for(int i = 0;i < baseObj.Length;i++) {
             baseObj[i].SetActive(false);
+        }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// インベントリボックスのアクティブの切り替え
+    /// </summary>
+    private void BoxObjSwitchActivate (GameObject obj) {
+        if(!onceSwitchIndex) {
+            BoxObjInitialize();
+            obj.SetActive(true);
+            onceSwitchIndex = true;
         }
     }
 }
