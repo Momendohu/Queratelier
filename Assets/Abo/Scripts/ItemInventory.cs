@@ -174,6 +174,7 @@ public class ItemInventory : MonoBehaviour {
                 if(indexID == IndexID.MIX) {
                     //アイテムが何かしら選択されているなら決定してインベントリを閉じる
                     if(!(ChangeSelectedItemToItemID(selectedItem) == -1)) {
+                        UseItem();
                         StartClosing();
                     }
                 }
@@ -497,6 +498,18 @@ public class ItemInventory : MonoBehaviour {
     private void DisplayHoldItemNum () {
         for(int i = 0;i < holdItemNumObj.Length;i++) {
             holdItemNumObj[i].transform.Find("Text").GetComponent<Text>().text = "" + holdItemNum[i];
+        }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// アイテムを使用する
+    /// </summary>
+    private void UseItem () {
+        for(int i = 0;i < selectedItem.Length;i++) {
+            if(selectedItem[i] != -1) {
+                holdItemNum[selectedItem[i]]--;
+            }
         }
     }
 }
