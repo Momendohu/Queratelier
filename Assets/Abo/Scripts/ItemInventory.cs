@@ -15,6 +15,8 @@ public class ItemInventory : MonoBehaviour {
 
     private GameObject mixObjImage;
 
+    private GameObject[] holdItemNumObj = new GameObject[4];
+
     //=============================================================
     private IEnumerator ien;
 
@@ -27,6 +29,8 @@ public class ItemInventory : MonoBehaviour {
     private bool onceSwitchIndex = false; //指示してるボックスが変更された時いちどだけ呼び出すフラグ
 
     private int[] selectedItem = { -1,-1 }; //選択したアイテム
+
+    private int[] holdItemNum = { 4,4,4,4 };//持っているアイテムの数
 
     //=============================================================
     //インベントリの状態
@@ -94,11 +98,15 @@ public class ItemInventory : MonoBehaviour {
         }
 
         mixObjDefault = transform.Find("Mix/Frame/M/Default").gameObject;
-        for(int i = 0;i < baseObj.Length;i++) {
+        for(int i = 0;i < baseObjDefault.Length;i++) {
             baseObjDefault[i] = transform.Find("Base/Frame/B" + (i + 1) + "/Default").gameObject;
         }
 
         mixObjImage = transform.Find("Mix/Frame/M/Image").gameObject;
+
+        for(int i = 0;i < holdItemNumObj.Length;i++) {
+            holdItemNumObj[i] = transform.Find("Base/Frame/B" + (i + 1) + "/HoldNum").gameObject;
+        }
     }
 
     private void Awake () {
@@ -158,6 +166,7 @@ public class ItemInventory : MonoBehaviour {
 
             ShiftIndex();
             ApplyMixBoxDisplay();
+            DisplayHoldItemNum();
 
             //アイテムの選択
             if(InputModule.IsPushButtonDown(KeyCode.Space)) {
@@ -479,5 +488,15 @@ public class ItemInventory : MonoBehaviour {
         }
 
         return itemId;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// アイテム所持数の表示
+    /// </summary>
+    private void DisplayHoldItemNum () {
+        for(int i = 0;i < holdItemNumObj.Length;i++) {
+            holdItemNumObj[i].transform.Find("Text").GetComponent<Text>().text = "" + holdItemNum[i];
+        }
     }
 }
