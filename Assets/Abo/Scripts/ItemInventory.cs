@@ -105,7 +105,7 @@ public class ItemInventory : MonoBehaviour {
         mixObjImage = transform.Find("Mix/Frame/M/Image").gameObject;
 
         for(int i = 0;i < holdItemNumObj.Length;i++) {
-            holdItemNumObj[i] = transform.Find("Base/Frame/B" + (i + 1) + "/HoldNum").gameObject;
+            holdItemNumObj[i] = transform.Find("Base/Frame/B" + (i + 1) + "/HoldNum/Text").gameObject;
         }
     }
 
@@ -164,10 +164,6 @@ public class ItemInventory : MonoBehaviour {
                 break;
             }
 
-            ShiftIndex();
-            ApplyMixBoxDisplay();
-            DisplayHoldItemNum();
-
             //アイテムの選択
             if(InputModule.IsPushButtonDown(KeyCode.Space)) {
                 //ミックスボックスを選択しているなら
@@ -187,6 +183,10 @@ public class ItemInventory : MonoBehaviour {
 
                 }
             }
+
+            ShiftIndex();
+            ApplyMixBoxDisplay();
+            DisplayHoldItemNum();
 
             break;
 
@@ -518,7 +518,7 @@ public class ItemInventory : MonoBehaviour {
     /// </summary>
     private void DisplayHoldItemNum () {
         for(int i = 0;i < holdItemNumObj.Length;i++) {
-            holdItemNumObj[i].transform.Find("Text").GetComponent<Text>().text = "" + holdItemNum[i];
+            holdItemNumObj[i].GetComponent<Text>().text = "" + holdItemNum[i];
         }
     }
 
