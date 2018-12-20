@@ -175,6 +175,7 @@ public class ItemInventory : MonoBehaviour {
                     //アイテムが何かしら選択されているなら決定してインベントリを閉じる
                     if(!(ChangeSelectedItemToItemID(selectedItem) == -1)) {
                         UseItem();
+                        InitializeSelectItem();
                         StartClosing();
                     }
                 }
@@ -318,11 +319,16 @@ public class ItemInventory : MonoBehaviour {
             return false;
         }
 
+        //アイテムを所持していない場合処理をスキップ
+        if(holdItemNum[num] <= 0) {
+            return false;
+        }
+
         //すでにアイテムを選んでいるかを調べる
         for(int i = 0;i < selectedItem.Length;i++) {
             if(selectedItem[i] == num) {
                 selectedItem[i] = -1;
-                ChangeBaseBoxDisplay(false);
+                ChangeBaseBoxDisplay(indexID,false);
                 return true;
             }
         }
@@ -331,7 +337,7 @@ public class ItemInventory : MonoBehaviour {
         for(int i = 0;i < selectedItem.Length;i++) {
             if(selectedItem[i] == -1) {
                 selectedItem[i] = num;
-                ChangeBaseBoxDisplay(true);
+                ChangeBaseBoxDisplay(indexID,true);
                 return true;
             } else {
                 continue;
@@ -343,9 +349,24 @@ public class ItemInventory : MonoBehaviour {
 
     //=============================================================
     /// <summary>
+    /// アイテム選択の初期化
+    /// </summary>
+    private void InitializeSelectItem () {
+        for(int i = 0;i < selectedItem.Length;i++) {
+            selectedItem[i] = -1;
+        }
+
+        ChangeBaseBoxDisplay(IndexID.BASE1,false);
+        ChangeBaseBoxDisplay(IndexID.BASE2,false);
+        ChangeBaseBoxDisplay(IndexID.BASE3,false);
+        ChangeBaseBoxDisplay(IndexID.BASE4,false);
+    }
+
+    //=============================================================
+    /// <summary>
     /// ボックス表示の変更(選択したかどうかを見た目でわかるように)
     /// </summary>
-    private void ChangeBaseBoxDisplay (bool isSelected) {
+    private void ChangeBaseBoxDisplay (IndexID indexID,bool isSelected) {
         switch(indexID) {
             case IndexID.BASE1:
             case IndexID.BASE2:
