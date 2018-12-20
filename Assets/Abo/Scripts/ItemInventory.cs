@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class ItemInventory : MonoBehaviour {
+    public Sprite[] ItemImage;
+
+    //=============================================================
     private GameObject mixObj;
     private GameObject[] baseObj = new GameObject[4];
+
+    private GameObject mixObjDefault;
+    private GameObject[] baseObjDefault = new GameObject[4];
+
+    private GameObject mixObjImage;
 
     //=============================================================
     private IEnumerator ien;
@@ -17,6 +25,8 @@ public class ItemInventory : MonoBehaviour {
     private float movingSpeed = 0.1f; //移動スピード
 
     private bool onceSwitchIndex = false; //指示してるボックスが変更された時いちどだけ呼び出すフラグ
+
+    private int[] selectedItem = { -1,-1 }; //選択したアイテム
 
     //=============================================================
     //インベントリの状態
@@ -43,12 +53,52 @@ public class ItemInventory : MonoBehaviour {
     private IndexID indexID = IndexID.MIX;
 
     //=============================================================
+    /// <summary>
+    /// アイテムID
+    /// </summary>
+    private enum ItemID {
+        NONE = -1,
+
+        CANE = 0,
+        ORANGE = 1,
+        WALL = 2,
+        BOMB = 3,
+
+        MIX1 = 100,
+        MIX2 = 101,
+        MIX3 = 102,
+        MIX4 = 103,
+
+        MIX5 = 200,
+        MIX6 = 201,
+        MIX7 = 202,
+        MIX8 = 203,
+
+        MIX9 = 300,
+        MIX10 = 301,
+        MIX11 = 302,
+        MIX12 = 303,
+
+        MIX13 = 400,
+        MIX14 = 401,
+        MIX15 = 402,
+        MIX16 = 403,
+    }
+
+    //=============================================================
     private void Init () {
         //参照をとる
         mixObj = transform.Find("Mix/Frame/M/Focus").gameObject;
         for(int i = 0;i < baseObj.Length;i++) {
-            baseObj[i] = GameObject.Find("Base/Frame/B" + (i + 1) + "/Focus");
+            baseObj[i] = transform.Find("Base/Frame/B" + (i + 1) + "/Focus").gameObject;
         }
+
+        mixObjDefault = transform.Find("Mix/Frame/M/Default").gameObject;
+        for(int i = 0;i < baseObj.Length;i++) {
+            baseObjDefault[i] = transform.Find("Base/Frame/B" + (i + 1) + "/Default").gameObject;
+        }
+
+        mixObjImage = transform.Find("Mix/Frame/M/Image").gameObject;
     }
 
     private void Awake () {
@@ -107,9 +157,24 @@ public class ItemInventory : MonoBehaviour {
             }
 
             ShiftIndex();
+            ApplyMixBoxDisplay();
 
+            //アイテムの選択
             if(InputModule.IsPushButtonDown(KeyCode.Space)) {
-                StartClosing();
+                //ミックスボックスを選択しているなら
+                if(indexID == IndexID.MIX) {
+                    //アイテムが何かしら選択されているなら決定してインベントリを閉じる
+                    if(!(ChangeSelectedItemToItemID(selectedItem) == -1)) {
+                        StartClosing();
+                    }
+                }
+
+                //アイテムを選択(ベースボックス選択時)
+                if(SelectItem((int)indexID - 1)) {
+
+                } else {
+
+                }
             }
 
             break;
@@ -232,5 +297,187 @@ public class ItemInventory : MonoBehaviour {
             obj.SetActive(true);
             onceSwitchIndex = true;
         }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// アイテムを選択
+    /// </summary>
+    private bool SelectItem (int num) {
+        if(num == -1) {
+            return false;
+        }
+
+        //すでにアイテムを選んでいるかを調べる
+        for(int i = 0;i < selectedItem.Length;i++) {
+            if(selectedItem[i] == num) {
+                selectedItem[i] = -1;
+                ChangeBaseBoxDisplay(false);
+                return true;
+            }
+        }
+
+        //選択アイテムの保存
+        for(int i = 0;i < selectedItem.Length;i++) {
+            if(selectedItem[i] == -1) {
+                selectedItem[i] = num;
+                ChangeBaseBoxDisplay(true);
+                return true;
+            } else {
+                continue;
+            }
+        }
+
+        return false;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// ボックス表示の変更(選択したかどうかを見た目でわかるように)
+    /// </summary>
+    private void ChangeBaseBoxDisplay (bool isSelected) {
+        switch(indexID) {
+            case IndexID.BASE1:
+            case IndexID.BASE2:
+            case IndexID.BASE3:
+            case IndexID.BASE4:
+            baseObjDefault[(int)indexID - 1].GetComponent<ItemInventoryBoxDefault>().SwitchColor(isSelected);
+            break;
+
+            default:
+            break;
+        }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// 合成アイテムボックス表示の変更
+    /// </summary>
+    private void ApplyMixBoxDisplay () {
+        switch(ChangeSelectedItemToItemID(selectedItem)) {
+            case (int)ItemID.NONE:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,0);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[0];
+            break;
+
+            case (int)ItemID.CANE:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[2];
+            break;
+
+            case (int)ItemID.ORANGE:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[3];
+            break;
+
+            case (int)ItemID.WALL:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[4];
+            break;
+
+            case (int)ItemID.BOMB:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[5];
+            break;
+
+            //00
+            case (int)ItemID.MIX1:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //01
+            case (int)ItemID.MIX2:
+            case (int)ItemID.MIX5:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //02
+            case (int)ItemID.MIX3:
+            case (int)ItemID.MIX9:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //03
+            case (int)ItemID.MIX4:
+            case (int)ItemID.MIX13:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //11
+            case (int)ItemID.MIX6:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //12
+            case (int)ItemID.MIX7:
+            case (int)ItemID.MIX10:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //13
+            case (int)ItemID.MIX8:
+            case (int)ItemID.MIX14:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //22
+            case (int)ItemID.MIX11:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //23
+            case (int)ItemID.MIX12:
+            case (int)ItemID.MIX15:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            //33
+            case (int)ItemID.MIX16:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            break;
+
+            default:
+            mixObjImage.GetComponent<Image>().color = new Color(0,0,0,0);
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[0];
+            break;
+        }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// 選択したアイテムからアイテムIDを割り出す
+    /// </summary>
+    private int ChangeSelectedItemToItemID (int[] selectedItem) {
+        int item1 = -1;
+        int item2 = -1;
+
+        for(int i = 0;i < selectedItem.Length;i++) {
+            if(selectedItem[i] != -1) {
+                if(item1 == -1) {
+                    item1 = selectedItem[i];
+                } else {
+                    item2 = selectedItem[i];
+                }
+            }
+        }
+
+        int itemId = -1;
+        if(item2 != -1) {
+            itemId = (item2 + 1) * 100 + item1;
+        } else {
+            itemId = item1;
+        }
+
+        return itemId;
     }
 }
