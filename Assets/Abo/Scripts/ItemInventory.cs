@@ -532,5 +532,85 @@ public class ItemInventory : MonoBehaviour {
                 holdItemNum[selectedItem[i]]--;
             }
         }
+
+        CreateTestObj(GameObject.Find("Player").transform.position+Vector3.forward*2);
+        switch(ChangeSelectedItemToItemID(selectedItem)) {
+            case (int)ItemID.NONE:
+            break;
+
+            case (int)ItemID.CANE:
+            break;
+
+            case (int)ItemID.ORANGE:
+            break;
+
+            case (int)ItemID.WALL:
+            break;
+
+            case (int)ItemID.BOMB:
+            break;
+
+            //00
+            case (int)ItemID.MIX1:
+            break;
+
+            //01
+            case (int)ItemID.MIX2:
+            case (int)ItemID.MIX5:
+            break;
+
+            //02
+            case (int)ItemID.MIX3:
+            case (int)ItemID.MIX9:
+            break;
+
+            //03
+            case (int)ItemID.MIX4:
+            case (int)ItemID.MIX13:
+            break;
+
+            //11
+            case (int)ItemID.MIX6:
+            break;
+
+            //12
+            case (int)ItemID.MIX7:
+            case (int)ItemID.MIX10:
+            break;
+
+            //13
+            case (int)ItemID.MIX8:
+            case (int)ItemID.MIX14:
+            break;
+
+            //22
+            case (int)ItemID.MIX11:
+            break;
+
+            //23
+            case (int)ItemID.MIX12:
+            case (int)ItemID.MIX15:
+            break;
+
+            //33
+            case (int)ItemID.MIX16:
+            break;
+
+            default:
+            break;
+        }
+    }
+
+
+    //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||(テスト用)
+    //=============================================================
+    /// <summary>
+    /// テスト用オブジェクトを作成する
+    /// </summary>
+    private void CreateTestObj (Vector3 pos) {
+        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        obj.transform.localScale *= 0.5f;
+        obj.transform.position = pos;
+        obj.AddComponent<Rigidbody>();
     }
 }
