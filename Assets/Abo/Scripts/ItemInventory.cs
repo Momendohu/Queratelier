@@ -24,7 +24,7 @@ public class ItemInventory : MonoBehaviour {
     private Vector3 basePos = Vector3.zero; //基準の位置
     private Vector3 amountOfOpenMovement = new Vector3(0,200,0); //開くときの移動量
     private Vector3 amountOfCloseMovement = new Vector3(0,-200,0); //閉じるときの移動量
-    private float movingSpeed = 0.1f; //移動スピード
+    private float movingSpeed = 0.3f; //移動スピード
 
     private bool onceSwitchIndex = false; //指示してるボックスが変更された時いちどだけ呼び出すフラグ
 
