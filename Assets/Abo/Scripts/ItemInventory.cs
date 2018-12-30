@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ItemInventory : MonoBehaviour {
     public Sprite[] ItemImage;
+    public GameObject[] ItemPrefabs;
 
     //=============================================================
     private GameObject mixObj;
@@ -533,7 +534,6 @@ public class ItemInventory : MonoBehaviour {
             }
         }
 
-        CreateTestObj(GameObject.Find("Player").transform.position+Vector3.forward*2);
         switch(ChangeSelectedItemToItemID(selectedItem)) {
             case (int)ItemID.NONE:
             break;
@@ -545,6 +545,7 @@ public class ItemInventory : MonoBehaviour {
             break;
 
             case (int)ItemID.WALL:
+            CreateItem((int)ItemID.WALL,GameObject.Find("Player").transform.position + Vector3.forward * 2);
             break;
 
             case (int)ItemID.BOMB:
@@ -599,6 +600,15 @@ public class ItemInventory : MonoBehaviour {
             default:
             break;
         }
+    }
+
+    //=============================================================
+    /// <summary>
+    /// アイテムを生成する
+    /// </summary>
+    private void CreateItem (int id,Vector3 pos) {
+        GameObject obj = Instantiate(ItemPrefabs[id],pos,Quaternion.identity) as GameObject;
+        obj.transform.position = pos;
     }
 
 

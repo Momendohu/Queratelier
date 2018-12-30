@@ -2021,6 +2021,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d93c1188ce2c3794eb15ef72a1426146, type: 3}
   - {fileID: 21300000, guid: 320dc3172a4c18e4d9e992ba5a894dc5, type: 3}
   - {fileID: 21300000, guid: 154a1a62aeda6c04685680bc94cfaadd, type: 3}
+  ItemPrefabs:
+  - {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df, type: 2}
+  - {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df, type: 2}
+  - {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df, type: 2}
+  - {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df, type: 2}
+  - {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df, type: 2}
+  - {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df, type: 2}
 --- !u!1 &734905881
 GameObject:
   m_ObjectHideFlags: 0
