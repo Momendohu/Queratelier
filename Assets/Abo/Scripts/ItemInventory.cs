@@ -186,6 +186,12 @@ public class ItemInventory : MonoBehaviour {
                 }
             }
 
+            //インベントリを閉じる
+            if(InputModule.IsPushButtonDown(KeyCode.Space)) {
+                InitializeSelectItem();
+                StartClosing();
+            }
+
             ShiftIndex();
             ApplyMixBoxDisplay();
             DisplayHoldItemNum();
@@ -266,7 +272,7 @@ public class ItemInventory : MonoBehaviour {
     /// 指示してるボックスを変更する
     /// </summary>
     private void ShiftIndex () {
-        if(InputModule.IsPushButtonDown(KeyCode.LeftArrow) || InputModule.IsPushButtonDown(KeyCode.A)) {
+        if(InputModule.IsPushButtonDown(KeyCode.A)) {
             //フラグの初期化
             onceSwitchIndex = false;
 
@@ -277,7 +283,7 @@ public class ItemInventory : MonoBehaviour {
             }
         }
 
-        if(InputModule.IsPushButtonDown(KeyCode.RightArrow) || InputModule.IsPushButtonDown(KeyCode.D)) {
+        if(InputModule.IsPushButtonDown(KeyCode.D)) {
             //フラグの初期化
             onceSwitchIndex = false;
 
