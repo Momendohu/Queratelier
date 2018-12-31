@@ -166,7 +166,7 @@ public class ItemInventory : MonoBehaviour {
             }
 
             //アイテムの選択
-            if(InputModule.IsPushButtonDown(KeyCode.Space)) {
+            if(InputModule.IsPushButtonDown(KeyCode.UpArrow)) {
                 //ミックスボックスを選択しているなら
                 if(indexID == IndexID.MIX) {
                     //アイテムが何かしら選択されているなら決定してインベントリを閉じる
@@ -373,6 +373,7 @@ public class ItemInventory : MonoBehaviour {
             case IndexID.BASE2:
             case IndexID.BASE3:
             case IndexID.BASE4:
+            baseObj[(int)indexID - 1].GetComponent<ItemInventoryBox>().SwitchColor(isSelected);
             baseObjDefault[(int)indexID - 1].GetComponent<ItemInventoryBoxDefault>().SwitchColor(isSelected);
             break;
 

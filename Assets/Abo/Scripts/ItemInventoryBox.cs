@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class ItemInventoryBox : MonoBehaviour {
     //=============================================================
@@ -11,6 +11,9 @@ public class ItemInventoryBox : MonoBehaviour {
     private Coroutine coroutine;
 
     private float sockSpeed = 0.1f; //ボックスをひたすスピード
+
+    private Color defaultColor = new Color(0f,0.4940184f,0.754717f);
+    private Color selectedColor = new Color(0.9411765f,0.6509804f,0.2196078f);
 
     //ひたしたかどうか
     private bool isSoaked;
@@ -64,5 +67,17 @@ public class ItemInventoryBox : MonoBehaviour {
     private void WipeFrame () {
         isSoaked = false;
         soakingObj.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// 色を選択されているかどうかで変える
+    /// </summary>
+    public void SwitchColor (bool isSelected) {
+        if(isSelected) {
+            soakingObj.GetComponent<Image>().color = selectedColor;
+        } else {
+            soakingObj.GetComponent<Image>().color = defaultColor;
+        }
     }
 }

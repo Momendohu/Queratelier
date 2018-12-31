@@ -11,7 +11,7 @@ public class ItemInventoryBoxDefault : MonoBehaviour {
     private Color selectedColor = new Color(0.9411765f,0.6509804f,0.2196078f);
 
     //=============================================================
-    private void Init () {
+    public void Init () {
         frame = transform.Find("Frame").gameObject;
     }
 
