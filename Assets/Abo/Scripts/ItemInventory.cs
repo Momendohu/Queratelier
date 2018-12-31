@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ItemInventory : MonoBehaviour {
     public Sprite[] ItemImage;
@@ -55,7 +56,7 @@ public class ItemInventory : MonoBehaviour {
 
         SIZE = 5,
     }
-    private IndexID indexID = IndexID.MIX;
+    private IndexID indexID = IndexID.BASE1;
 
     //=============================================================
     /// <summary>
@@ -165,23 +166,23 @@ public class ItemInventory : MonoBehaviour {
                 break;
             }
 
-            //アイテムの選択
-            if(InputModule.IsPushButtonDown(KeyCode.UpArrow)) {
-                //ミックスボックスを選択しているなら
-                if(indexID == IndexID.MIX) {
-                    //アイテムが何かしら選択されているなら決定してインベントリを閉じる
-                    if(!(ChangeSelectedItemToItemID(selectedItem) == -1)) {
-                        UseItem();
-                        InitializeSelectItem();
-                        StartClosing();
-                    }
+            //アイテムの選択の解除
+            if(InputModule.IsPushButtonDown(KeyCode.S)) {
+                //選択しているアイテムがすでに選択されたものであるなら
+                if(selectedItem.Where(x => x == (int)indexID - 1).Count() >= 1) {
+                    SelectItem((int)indexID - 1);
                 }
+            }
 
-                //アイテムを選択(ベースボックス選択時)
-                if(SelectItem((int)indexID - 1)) {
-
+            //アイテムの選択
+            if(InputModule.IsPushButtonDown(KeyCode.W)) {
+                //選択しているアイテムがすでに選択されたものであるなら
+                if(selectedItem.Where(x => x == (int)indexID - 1).Count() >= 1) {
+                    UseItem();
+                    InitializeSelectItem();
+                    StartClosing();
                 } else {
-
+                    SelectItem((int)indexID - 1);
                 }
             }
 
@@ -227,7 +228,7 @@ public class ItemInventory : MonoBehaviour {
         //インベントリ操作の初期化
         onceSwitchIndex = false;
         BoxObjInitialize();
-        indexID = IndexID.MIX;
+        indexID = IndexID.BASE1;
 
         //モーション処理
         Vector3 pos = GetComponent<RectTransform>().localPosition;
@@ -271,7 +272,7 @@ public class ItemInventory : MonoBehaviour {
 
             //指示してるボックスの変更
             indexID--;
-            if(indexID < 0) {
+            if(indexID < IndexID.MIX + 1) {
                 indexID = IndexID.SIZE - 1;
             }
         }
@@ -283,7 +284,7 @@ public class ItemInventory : MonoBehaviour {
             //指示してるボックスの変更
             indexID++;
             if(indexID > IndexID.SIZE - 1) {
-                indexID = IndexID.MIX;
+                indexID = IndexID.BASE1;
             }
         }
     }
@@ -321,9 +322,7 @@ public class ItemInventory : MonoBehaviour {
         }
 
         //アイテムを所持していない場合処理をスキップ
-        if(holdItemNum[num] <= 0) {
-            return false;
-        }
+        if(!IsHoldItem(num)) return false;
 
         //すでにアイテムを選んでいるかを調べる
         for(int i = 0;i < selectedItem.Length;i++) {
@@ -343,6 +342,18 @@ public class ItemInventory : MonoBehaviour {
             } else {
                 continue;
             }
+        }
+
+        return false;
+    }
+
+    //=============================================================
+    /// <summary>
+    /// 特定の番号のアイテムを所持しているかどうか
+    /// </summary>
+    private bool IsHoldItem (int num) {
+        if(holdItemNum[num] >= 1) {
+            return true;
         }
 
         return false;
