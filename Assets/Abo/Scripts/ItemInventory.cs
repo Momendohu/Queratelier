@@ -65,10 +65,10 @@ public class ItemInventory : MonoBehaviour {
     private enum ItemID {
         NONE = -1,
 
-        CANE = 0,
+        MAGIC_CIRCLE = 0,
         ORANGE = 1,
         WALL = 2,
-        BOMB = 3,
+        GRENADE = 3,
 
         MIX1 = 100,
         MIX2 = 101,
@@ -410,7 +410,7 @@ public class ItemInventory : MonoBehaviour {
             mixObjImage.GetComponent<Image>().sprite = ItemImage[0];
             break;
 
-            case (int)ItemID.CANE:
+            case (int)ItemID.MAGIC_CIRCLE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[2];
             break;
@@ -425,7 +425,7 @@ public class ItemInventory : MonoBehaviour {
             mixObjImage.GetComponent<Image>().sprite = ItemImage[4];
             break;
 
-            case (int)ItemID.BOMB:
+            case (int)ItemID.GRENADE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[5];
             break;
@@ -556,7 +556,7 @@ public class ItemInventory : MonoBehaviour {
             case (int)ItemID.NONE:
             break;
 
-            case (int)ItemID.CANE:
+            case (int)ItemID.MAGIC_CIRCLE:
             break;
 
             case (int)ItemID.ORANGE:
@@ -567,7 +567,7 @@ public class ItemInventory : MonoBehaviour {
             CreateItem((int)ItemID.WALL,GameObject.Find("Player").transform.position + Vector3.forward * 2);
             break;
 
-            case (int)ItemID.BOMB:
+            case (int)ItemID.GRENADE:
             break;
 
             //00
