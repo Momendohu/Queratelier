@@ -560,6 +560,7 @@ public class ItemInventory : MonoBehaviour {
             break;
 
             case (int)ItemID.ORANGE:
+            CreateItem((int)ItemID.ORANGE,GameObject.Find("Player").transform.position + Vector3.forward * 2);
             break;
 
             case (int)ItemID.WALL:
@@ -625,6 +626,7 @@ public class ItemInventory : MonoBehaviour {
     /// アイテムを生成する
     /// </summary>
     private void CreateItem (int id,Vector3 pos) {
+        Debug.Log(id);
         GameObject obj = Instantiate(ItemPrefabs[id],pos,Quaternion.identity) as GameObject;
         obj.transform.position = pos;
     }
