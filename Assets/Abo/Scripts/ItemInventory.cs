@@ -19,13 +19,15 @@ public class ItemInventory : MonoBehaviour {
 
     private GameObject[] holdItemNumObj = new GameObject[4];
 
+    private GameObject baseDisplayObject;
+
     //=============================================================
     private IEnumerator ien;
 
     private Vector3 currentPos = Vector3.zero; //現在位置
     private Vector3 basePos = Vector3.zero; //基準の位置
-    private Vector3 amountOfOpenMovement = new Vector3(0,200,0); //開くときの移動量
-    private Vector3 amountOfCloseMovement = new Vector3(0,-200,0); //閉じるときの移動量
+    private Vector3 amountOfOpenMovement = new Vector3(500,0,0); //開くときの移動量
+    private Vector3 amountOfCloseMovement = new Vector3(-500,0,0); //閉じるときの移動量
     private float movingSpeed = 0.3f; //移動スピード
 
     private bool onceSwitchIndex = false; //指示してるボックスが変更された時いちどだけ呼び出すフラグ
@@ -96,19 +98,21 @@ public class ItemInventory : MonoBehaviour {
         //参照をとる
         mixObj = transform.Find("Mix/Frame/M/Focus").gameObject;
         for(int i = 0;i < baseObj.Length;i++) {
-            baseObj[i] = transform.Find("Base/Frame/B" + (i + 1) + "/Focus").gameObject;
+            baseObj[i] = transform.Find("Base/DisplayArea/DisplayObject/Frame/B" + (i + 1) + "/Focus").gameObject;
         }
 
         mixObjDefault = transform.Find("Mix/Frame/M/Default").gameObject;
         for(int i = 0;i < baseObjDefault.Length;i++) {
-            baseObjDefault[i] = transform.Find("Base/Frame/B" + (i + 1) + "/Default").gameObject;
+            baseObjDefault[i] = transform.Find("Base/DisplayArea/DisplayObject/Frame/B" + (i + 1) + "/Default").gameObject;
         }
 
         mixObjImage = transform.Find("Mix/Frame/M/Image").gameObject;
 
         for(int i = 0;i < holdItemNumObj.Length;i++) {
-            holdItemNumObj[i] = transform.Find("Base/Frame/B" + (i + 1) + "/HoldNum/Text").gameObject;
+            holdItemNumObj[i] = transform.Find("Base/DisplayArea/DisplayObject/Frame/B" + (i + 1) + "/HoldNum/Text").gameObject;
         }
+
+        baseDisplayObject = transform.Find("Base/DisplayArea/DisplayObject").gameObject;
     }
 
     private void Awake () {
@@ -118,7 +122,7 @@ public class ItemInventory : MonoBehaviour {
 
     private void Start () {
         //基準の位置の更新
-        basePos = GetComponent<RectTransform>().localPosition;
+        basePos = baseDisplayObject.GetComponent<RectTransform>().localPosition;
     }
 
     private void Update () {
@@ -179,7 +183,8 @@ public class ItemInventory : MonoBehaviour {
                 //選択しているアイテムがすでに選択されたものであるなら
                 if(selectedItem.Where(x => x == (int)indexID - 1).Count() >= 1) {
                     UseItem();
-                    InitializeSelectItem();
+                    //InitializeSelectItem();
+                    CheckRemainItemAndCloseBox();
                     StartClosing();
                 } else {
                     SelectItem((int)indexID - 1);
@@ -188,7 +193,8 @@ public class ItemInventory : MonoBehaviour {
 
             //インベントリを閉じる
             if(InputModule.IsPushButtonDown(KeyCode.Space)) {
-                InitializeSelectItem();
+                //InitializeSelectItem();
+                CheckRemainItemAndCloseBox();
                 StartClosing();
             }
 
@@ -210,7 +216,7 @@ public class ItemInventory : MonoBehaviour {
 
         //位置の更新
         if(currentPos.sqrMagnitude != 0) {
-            GetComponent<RectTransform>().localPosition = currentPos;
+            baseDisplayObject.GetComponent<RectTransform>().localPosition = currentPos;
         }
     }
 
@@ -220,7 +226,7 @@ public class ItemInventory : MonoBehaviour {
     /// </summary>
     private void StartOpening () {
         //モーション処理
-        Vector3 pos = GetComponent<RectTransform>().localPosition;
+        Vector3 pos = baseDisplayObject.GetComponent<RectTransform>().localPosition;
         ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfOpenMovement,movingSpeed);
         StartCoroutine(ien);
         eventState = EventState.OPENING;
@@ -233,11 +239,11 @@ public class ItemInventory : MonoBehaviour {
     private void StartClosing () {
         //インベントリ操作の初期化
         onceSwitchIndex = false;
-        BoxObjInitialize();
-        indexID = IndexID.BASE1;
+        //BoxObjInitialize();
+        //indexID = IndexID.BASE1;
 
         //モーション処理
-        Vector3 pos = GetComponent<RectTransform>().localPosition;
+        Vector3 pos = baseDisplayObject.GetComponent<RectTransform>().localPosition;
         ien = MotionModule.PointToPointSmoothly(pos,pos + amountOfCloseMovement,movingSpeed);
         StartCoroutine(ien);
         eventState = EventState.CLOSING;
@@ -378,6 +384,24 @@ public class ItemInventory : MonoBehaviour {
         ChangeBaseBoxDisplay(IndexID.BASE2,false);
         ChangeBaseBoxDisplay(IndexID.BASE3,false);
         ChangeBaseBoxDisplay(IndexID.BASE4,false);
+    }
+
+    //=============================================================
+    /// <summary>
+    /// アイテムを所持しているかどうかでアイテムボックスのアクティブの切り替えをする
+    /// </summary>
+    private void CheckRemainItemAndCloseBox () {
+        for(int i = 0;i < holdItemNum.Length;i++) {
+            if(holdItemNum[i] <= 0) {
+                for(int j = 0;j < selectedItem.Length;j++) {
+                    if(selectedItem[j] == i) {
+                        selectedItem[j] = -1;
+                    }
+                }
+
+                ChangeBaseBoxDisplay((IndexID)(i + 1),false);
+            }
+        }
     }
 
     //=============================================================
@@ -627,7 +651,6 @@ public class ItemInventory : MonoBehaviour {
     /// アイテムを生成する
     /// </summary>
     private void CreateItem (int id,Vector3 pos) {
-        Debug.Log(id);
         GameObject obj = Instantiate(ItemPrefabs[id],pos,Quaternion.identity) as GameObject;
         obj.transform.position = pos;
     }
