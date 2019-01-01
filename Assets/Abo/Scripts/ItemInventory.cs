@@ -65,30 +65,30 @@ public class ItemInventory : MonoBehaviour {
     private enum ItemID {
         NONE = -1,
 
-        MAGIC_CIRCLE = 0,
+        MAGIC = 0,
         ORANGE = 1,
         WALL = 2,
         GRENADE = 3,
 
-        MIX1 = 100,
-        MIX2 = 101,
-        MIX3 = 102,
-        MIX4 = 103,
+        MAGIC_MAGIC = 100, //今回使用しない 
+        MAGIC_ORANGE = 101,
+        MAGIC_WALL = 102,
+        MAGIC_GRENADE = 103,
 
-        MIX5 = 200,
-        MIX6 = 201,
-        MIX7 = 202,
-        MIX8 = 203,
+        ORANGE_MAGIC = 200,
+        ORANGE_ORANGE = 201, //今回使用しない
+        ORANGE_WALL = 202,
+        ORANGE_GRENADE = 203,
 
-        MIX9 = 300,
-        MIX10 = 301,
-        MIX11 = 302,
-        MIX12 = 303,
+        WALL_MAGIC = 300,
+        WALL_ORANGE = 301,
+        WALL_WALL = 302, //今回使用しない
+        WALL_GRENADE = 303,
 
-        MIX13 = 400,
-        MIX14 = 401,
-        MIX15 = 402,
-        MIX16 = 403,
+        GRENADE_MAGIC = 400,
+        GRENADE_ORANGE = 401,
+        GRENADE_WALL = 402,
+        GRENADE_GRENADE = 403, //今回使用しない
     }
 
     //=============================================================
@@ -410,7 +410,7 @@ public class ItemInventory : MonoBehaviour {
             mixObjImage.GetComponent<Image>().sprite = ItemImage[0];
             break;
 
-            case (int)ItemID.MAGIC_CIRCLE:
+            case (int)ItemID.MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[2];
             break;
@@ -431,67 +431,67 @@ public class ItemInventory : MonoBehaviour {
             break;
 
             //00
-            case (int)ItemID.MIX1:
+            case (int)ItemID.MAGIC_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //01
-            case (int)ItemID.MIX2:
-            case (int)ItemID.MIX5:
+            case (int)ItemID.MAGIC_ORANGE:
+            case (int)ItemID.ORANGE_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //02
-            case (int)ItemID.MIX3:
-            case (int)ItemID.MIX9:
+            case (int)ItemID.MAGIC_WALL:
+            case (int)ItemID.WALL_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //03
-            case (int)ItemID.MIX4:
-            case (int)ItemID.MIX13:
+            case (int)ItemID.MAGIC_GRENADE:
+            case (int)ItemID.GRENADE_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //11
-            case (int)ItemID.MIX6:
+            case (int)ItemID.ORANGE_ORANGE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //12
-            case (int)ItemID.MIX7:
-            case (int)ItemID.MIX10:
+            case (int)ItemID.ORANGE_WALL:
+            case (int)ItemID.WALL_ORANGE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //13
-            case (int)ItemID.MIX8:
-            case (int)ItemID.MIX14:
+            case (int)ItemID.ORANGE_GRENADE:
+            case (int)ItemID.GRENADE_ORANGE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //22
-            case (int)ItemID.MIX11:
+            case (int)ItemID.WALL_WALL:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //23
-            case (int)ItemID.MIX12:
-            case (int)ItemID.MIX15:
+            case (int)ItemID.WALL_GRENADE:
+            case (int)ItemID.GRENADE_WALL:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
 
             //33
-            case (int)ItemID.MIX16:
+            case (int)ItemID.GRENADE_GRENADE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
             mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
             break;
@@ -556,7 +556,7 @@ public class ItemInventory : MonoBehaviour {
             case (int)ItemID.NONE:
             break;
 
-            case (int)ItemID.MAGIC_CIRCLE:
+            case (int)ItemID.MAGIC:
             break;
 
             case (int)ItemID.ORANGE:
@@ -572,49 +572,49 @@ public class ItemInventory : MonoBehaviour {
             break;
 
             //00
-            case (int)ItemID.MIX1:
+            case (int)ItemID.MAGIC_MAGIC:
             break;
 
             //01
-            case (int)ItemID.MIX2:
-            case (int)ItemID.MIX5:
+            case (int)ItemID.MAGIC_ORANGE:
+            case (int)ItemID.ORANGE_MAGIC:
             break;
 
             //02
-            case (int)ItemID.MIX3:
-            case (int)ItemID.MIX9:
+            case (int)ItemID.MAGIC_WALL:
+            case (int)ItemID.WALL_MAGIC:
             break;
 
             //03
-            case (int)ItemID.MIX4:
-            case (int)ItemID.MIX13:
+            case (int)ItemID.MAGIC_GRENADE:
+            case (int)ItemID.GRENADE_MAGIC:
             break;
 
             //11
-            case (int)ItemID.MIX6:
+            case (int)ItemID.ORANGE_ORANGE:
             break;
 
             //12
-            case (int)ItemID.MIX7:
-            case (int)ItemID.MIX10:
+            case (int)ItemID.ORANGE_WALL:
+            case (int)ItemID.WALL_ORANGE:
             break;
 
             //13
-            case (int)ItemID.MIX8:
-            case (int)ItemID.MIX14:
+            case (int)ItemID.ORANGE_GRENADE:
+            case (int)ItemID.GRENADE_ORANGE:
             break;
 
             //22
-            case (int)ItemID.MIX11:
+            case (int)ItemID.WALL_WALL:
             break;
 
             //23
-            case (int)ItemID.MIX12:
-            case (int)ItemID.MIX15:
+            case (int)ItemID.WALL_GRENADE:
+            case (int)ItemID.GRENADE_WALL:
             break;
 
             //33
-            case (int)ItemID.MIX16:
+            case (int)ItemID.GRENADE_GRENADE:
             break;
 
             default:
