@@ -568,6 +568,7 @@ public class ItemInventory : MonoBehaviour {
             break;
 
             case (int)ItemID.GRENADE:
+            CreateItem((int)ItemID.GRENADE,GameObject.Find("Player").transform.position + Vector3.forward * 2);
             break;
 
             //00
