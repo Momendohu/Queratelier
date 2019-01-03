@@ -212,6 +212,9 @@ public class ItemInventory : MonoBehaviour {
             break;
         }
 
+        /*if(Input.GetKey(KeyCode.L)) {
+            GameObject.Find("Player").transform.eulerAngles += Vector3.up;
+        }*/
         //Debug.Log(eventState);
 
         //位置の更新
@@ -576,24 +579,30 @@ public class ItemInventory : MonoBehaviour {
             }
         }
 
+        GameObject player = GameObject.Find("Player");
+        GameObject generateObj = null;
         switch(ChangeSelectedItemToItemID(selectedItem)) {
             case (int)ItemID.NONE:
             break;
 
             case (int)ItemID.MAGIC:
-            CreateItem((int)ItemID.MAGIC,GameObject.Find("Player").transform.position + Vector3.forward * 2);
+            GameObject obj = CreateItem((int)ItemID.MAGIC,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
             break;
 
             case (int)ItemID.ORANGE:
-            CreateItem((int)ItemID.ORANGE,GameObject.Find("Player").transform.position + Vector3.forward * 2);
+            generateObj = CreateItem((int)ItemID.ORANGE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+            generateObj.transform.eulerAngles = player.transform.eulerAngles;
             break;
 
             case (int)ItemID.WALL:
-            CreateItem((int)ItemID.WALL,GameObject.Find("Player").transform.position + Vector3.forward * 2);
+            generateObj = CreateItem((int)ItemID.WALL,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+            generateObj.transform.eulerAngles = player.transform.eulerAngles;
             break;
 
             case (int)ItemID.GRENADE:
-            CreateItem((int)ItemID.GRENADE,GameObject.Find("Player").transform.position + Vector3.forward * 2);
+            generateObj = CreateItem((int)ItemID.GRENADE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 1);
+            generateObj.transform.eulerAngles = player.transform.eulerAngles;
+            generateObj.GetComponent<Grenade>().AddSpeed((GetForwardPosFromRotate(player.transform.eulerAngles) + Vector3.up) * 5);
             break;
 
             //00
@@ -649,11 +658,22 @@ public class ItemInventory : MonoBehaviour {
 
     //=============================================================
     /// <summary>
+    /// 特定のオブジェクトの正面の座標を取得
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 GetForwardPosFromRotate (Vector3 rot) {
+        return new Vector3(-Mathf.Sin(Mathf.Deg2Rad * -rot.y),0,Mathf.Cos(Mathf.Deg2Rad * -rot.y));
+    }
+
+    //=============================================================
+    /// <summary>
     /// アイテムを生成する
     /// </summary>
-    private void CreateItem (int id,Vector3 pos) {
+    private GameObject CreateItem (int id,Vector3 pos) {
         GameObject obj = Instantiate(ItemPrefabs[id]) as GameObject;
         obj.transform.position = pos;
+
+        return obj;
     }
 
 
