@@ -5,6 +5,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Grenade : MonoBehaviour {
+    public GameObject Bomb;
+
     //=============================================================
     private Rigidbody _rigifbody;
 
@@ -23,6 +25,11 @@ public class Grenade : MonoBehaviour {
 
     private void Update () {
 
+    }
+
+    //=============================================================
+    private void GenerateBomb () {
+        Instantiate(Bomb,transform.position,Quaternion.identity);
     }
 
     //=============================================================
