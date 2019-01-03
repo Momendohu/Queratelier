@@ -18,13 +18,14 @@ public class CameraController : MonoBehaviour {
 	void Start () {
         offset = transform.position - Player.transform.position;
         prevPlayerPos = new Vector3(0, 0, -1);
+        PlayerPos = Player.transform.position;
         //CameraForward();
     }
 	
 	// Update is called once per frame
 	void LateUpdate () {
         //transform.position = Player.transform.position + offset;
-
+       
         transform.position += Player.transform.position - PlayerPos;
         PlayerPos = Player.transform.position;
 
