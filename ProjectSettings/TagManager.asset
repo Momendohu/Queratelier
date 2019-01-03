@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Atelier
   - Floor
+  - FxTemporaire
+  - Orange
   layers:
   - Default
   - TransparentFX
