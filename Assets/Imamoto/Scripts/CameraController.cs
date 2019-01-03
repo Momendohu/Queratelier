@@ -16,12 +16,10 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //offset = transform.position - Player.transform.position;
+        offset = transform.position - Player.transform.position;
         prevPlayerPos = new Vector3(0, 0, -1);
-        PlayerPos = Player.transform.position;
-
         //CameraForward();
-	}
+    }
 	
 	// Update is called once per frame
 	void LateUpdate () {
@@ -36,7 +34,6 @@ public class CameraController : MonoBehaviour {
 	}
 
     //カメラをキャラの後ろに移動させる
-    //posVectorが不明のため、使用不可
     private void CameraForward()
     {
         Vector3 currentPlayerPos = Player.transform.position;
@@ -47,7 +44,11 @@ public class CameraController : MonoBehaviour {
         Vector3 targetPos = currentPlayerPos + scale * posVector;
         targetPos.y = targetPos.y + 0.5f;
 
-        this.transform.position = targetPos;
+        this.transform.position = Vector3.Lerp(
+            this.transform.position,
+            targetPos,
+            cameraSpeed * Time.deltaTime
+        );
 
         this.transform.LookAt(Player.transform.position);
         prevPlayerPos = Player.transform.position;
