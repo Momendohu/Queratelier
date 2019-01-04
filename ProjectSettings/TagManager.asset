@@ -12,6 +12,7 @@ TagManager:
   - Orange
   - DamageHit
   - MagicHit
+  - AtelierItemSend
   layers:
   - Default
   - TransparentFX

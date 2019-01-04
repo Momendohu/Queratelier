@@ -33,6 +33,8 @@ public class Player : MonoBehaviour {
     private Vector3 cameraForward;
     private Vector3 moveForward;
 
+    public bool ItemStorable = false;
+
     //=============================================================================================================================
     //弾
 
@@ -96,6 +98,9 @@ public class Player : MonoBehaviour {
 
         shotInterval += Time.deltaTime;
         damageInterval += Time.deltaTime;
+
+        Debug.Log(ItemStorable);
+
 	}
 
     //================================================================================================================================
@@ -107,7 +112,7 @@ public class Player : MonoBehaviour {
         cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         moveForward = cameraForward * input.z + Camera.main.transform.right * input.x;
 
-        Debug.Log(input);
+        //Debug.Log(input);
 
         //方向キーが多少押されている
         if (input.magnitude > 0f)
@@ -169,6 +174,25 @@ public class Player : MonoBehaviour {
         {
             Knockback();
             //Debug.Log("knockback");
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //アイテム受け渡し範囲内の時
+        if(other.gameObject.tag == "AtelierItemSend")
+        {
+            //Debug.Log("アトリエアイテム受け渡し状態");
+            ItemStorable = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //アイテム受け渡し範囲から出たとき
+        if(other.gameObject.tag == "AtelierItemSend")
+        {
+            ItemStorable = false;
         }
     }
 

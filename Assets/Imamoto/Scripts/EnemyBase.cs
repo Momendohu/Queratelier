@@ -45,6 +45,9 @@ public class EnemyBase : MonoBehaviour {
             //ノックバック追加
             hp -= 10;
             Debug.Log("bomb");
+        }else if (other.tag == "MagicHit")
+        {
+            EnemyWarp_CreatePoint();
         }
 
         if (hp <= 0) Destroy(this.gameObject);
@@ -52,10 +55,6 @@ public class EnemyBase : MonoBehaviour {
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Magic")
-        {
-            EnemyWarp_CreatePoint();
-        }
 
     }
 
