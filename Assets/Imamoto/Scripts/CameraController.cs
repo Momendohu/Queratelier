@@ -13,7 +13,6 @@ public class CameraController : MonoBehaviour {
     public float scale = 3.0f;
     public float cameraSpeed = 2.0f;
 
-
 	// Use this for initialization
 	void Start () {
         offset = transform.position - Player.transform.position;
@@ -38,9 +37,10 @@ public class CameraController : MonoBehaviour {
     private void CameraForward()
     {
         Vector3 currentPlayerPos = Player.transform.position;
-        Vector3 backVecotr = (prevPlayerPos - currentPlayerPos).normalized;
+        Vector3 backVector = (prevPlayerPos - currentPlayerPos).normalized;
 
-        posVector = (backVecotr == Vector3.zero) ? posVector : backVecotr;
+        //移動したかどうか
+        posVector = (backVector == Vector3.zero) ? posVector : backVector;
 
         Vector3 targetPos = currentPlayerPos + scale * posVector;
         targetPos.y = targetPos.y + 0.5f;

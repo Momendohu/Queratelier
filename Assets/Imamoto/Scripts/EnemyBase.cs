@@ -7,7 +7,7 @@ using UnityEngine.AI;
 //敵スクリプト作成時は、このスクリプトを継承させること
 public class EnemyBase : MonoBehaviour {
 
-    public int hp;
+    public float hp;
     public float speed;
     public string charaName;
     private bool NowAttack = false;

@@ -18,25 +18,27 @@ public class EnemyCreatePoint : MonoBehaviour {
 
     [SerializeField]
     private List<EnemyList> Wave1_EnemyList = new List<EnemyList>();
-    //[SerializeField]
-    //private List<EnemyList> Wave2_EnemyList = new List<EnemyList>();
-    //[SerializeField]
-    //private List<EnemyList> Wave3_EnemyList = new List<EnemyList>();
-
     [SerializeField]
-    private int[,] array;
+    private List<EnemyList> Wave2_EnemyList = new List<EnemyList>();
+    [SerializeField]
+    private List<EnemyList> Wave3_EnemyList = new List<EnemyList>();
 
     private int NowWave = 0;
+    private float NowWaveTime = 0;
+
+    WaveManager wavemanager;
 
     // Use this for initialization
     void Start () {
+        wavemanager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+
         EnemyInstantiate(Wave1_EnemyList);
-        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        NowWave = wavemanager.GetNowWave();
+        NowWaveTime = wavemanager.GetWaveTimer();
 	}
 
     private void EnemyInstantiate(List<EnemyList> NowList)
