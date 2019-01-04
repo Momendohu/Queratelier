@@ -20,7 +20,6 @@ public class Grenade : MonoBehaviour {
     }
 
     private void Start () {
-
     }
 
     private void Update () {
@@ -28,6 +27,9 @@ public class Grenade : MonoBehaviour {
     }
 
     //=============================================================
+    /// <summary>
+    /// 爆弾を生成する
+    /// </summary>
     private void GenerateBomb () {
         Instantiate(Bomb,transform.position,Quaternion.identity);
     }
