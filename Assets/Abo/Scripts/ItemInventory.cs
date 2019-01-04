@@ -467,21 +467,21 @@ public class ItemInventory : MonoBehaviour {
             case (int)ItemID.MAGIC_ORANGE:
             case (int)ItemID.ORANGE_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
-            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[6];
             break;
 
             //02
             case (int)ItemID.MAGIC_WALL:
             case (int)ItemID.WALL_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
-            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[7];
             break;
 
             //03
             case (int)ItemID.MAGIC_GRENADE:
             case (int)ItemID.GRENADE_MAGIC:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
-            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[8];
             break;
 
             //11
@@ -494,14 +494,14 @@ public class ItemInventory : MonoBehaviour {
             case (int)ItemID.ORANGE_WALL:
             case (int)ItemID.WALL_ORANGE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
-            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[9];
             break;
 
             //13
             case (int)ItemID.ORANGE_GRENADE:
             case (int)ItemID.GRENADE_ORANGE:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
-            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[10];
             break;
 
             //22
@@ -514,7 +514,7 @@ public class ItemInventory : MonoBehaviour {
             case (int)ItemID.WALL_GRENADE:
             case (int)ItemID.GRENADE_WALL:
             mixObjImage.GetComponent<Image>().color = new Color(0,0,0,1);
-            mixObjImage.GetComponent<Image>().sprite = ItemImage[1];
+            mixObjImage.GetComponent<Image>().sprite = ItemImage[11];
             break;
 
             //33
