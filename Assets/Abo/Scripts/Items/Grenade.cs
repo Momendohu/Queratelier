@@ -6,9 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Grenade : MonoBehaviour {
     public GameObject Bomb;
+    public GameObject DamageHit;
 
     //=============================================================
     private Rigidbody _rigifbody;
+
+    private float invincibleIntervalLength = 1; //無敵時間の長さ
+    private float invincibleInterval; //無敵時間
+
+    private float BombLiveTimeLength = 1; //ボムが生きている時間
 
     //=============================================================
     private void Init () {
@@ -23,15 +29,23 @@ public class Grenade : MonoBehaviour {
     }
 
     private void Update () {
-
+        invincibleInterval += Time.fixedDeltaTime;
     }
 
     //=============================================================
     /// <summary>
     /// 爆弾を生成する
     /// </summary>
-    private void GenerateBomb () {
-        Instantiate(Bomb,transform.position,Quaternion.identity);
+    private GameObject GenerateBomb () {
+        return Instantiate(Bomb,transform.position,Quaternion.identity);
+    }
+
+    //=============================================================
+    /// <summary>
+    /// ダメージ判定用オブジェクトを生成する
+    /// </summary>
+    private GameObject GenerateDamageHit () {
+        return Instantiate(DamageHit,transform.position,Quaternion.identity);
     }
 
     //=============================================================
@@ -40,5 +54,14 @@ public class Grenade : MonoBehaviour {
     /// </summary>
     public void AddSpeed (Vector3 vec) {
         _rigifbody.velocity += vec;
+    }
+
+    //=============================================================
+    private void OnCollisionEnter (Collision collision) {
+        if(invincibleInterval >= invincibleIntervalLength) {
+            Destroy(GenerateBomb(),BombLiveTimeLength);
+            Destroy(GenerateDamageHit(),BombLiveTimeLength);
+            Destroy(this.gameObject);
+        }
     }
 }

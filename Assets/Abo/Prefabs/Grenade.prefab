@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bomb: {fileID: 1430866827013960, guid: 3c95c3fa715d2b34bb6b0841ed5a81b2, type: 2}
+  DamageHit: {fileID: 1604857223752442, guid: da66496f21ca5534daac1f420a2a6444, type: 2}
 --- !u!136 &136341964622488878
 CapsuleCollider:
   m_ObjectHideFlags: 1
