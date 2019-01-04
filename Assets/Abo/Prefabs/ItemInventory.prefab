@@ -1347,7 +1347,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 49b50fd5851ca4249a3a270dab70658b, type: 3}
   - {fileID: 21300000, guid: a0a97448b09e8de4dbb3900de0db152d, type: 3}
   - {fileID: 21300000, guid: 8cfba0a9c16058b4dbb5443e67e1a717, type: 3}
-  - {fileID: 21300000, guid: 5b9b2412523fe3e42ad529e59fee4b16, type: 3}
+  - {fileID: 21300000, guid: a59431b6325b7c74aa920235b69820ad, type: 3}
   - {fileID: 21300000, guid: 5b9b2412523fe3e42ad529e59fee4b16, type: 3}
   - {fileID: 21300000, guid: 5b9b2412523fe3e42ad529e59fee4b16, type: 3}
   ItemPrefabs:
