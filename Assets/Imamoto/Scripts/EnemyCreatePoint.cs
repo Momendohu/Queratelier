@@ -25,6 +25,7 @@ public class EnemyCreatePoint : MonoBehaviour {
 
     private int NowWave = 0;
     private float NowWaveTime = 0;
+    private int EnemyListIndex = 0;
 
     WaveManager wavemanager;
 
@@ -43,6 +44,9 @@ public class EnemyCreatePoint : MonoBehaviour {
 
     private void EnemyInstantiate(List<EnemyList> NowList)
     {
-        Debug.Log(NowList[0].List[0]);
+        if(NowList[EnemyListIndex].List[0] <= NowWaveTime)
+        {
+            //switch(NowList[EnemyListIndex].List[1])
+        }
     }
 }
