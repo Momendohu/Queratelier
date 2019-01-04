@@ -11,6 +11,7 @@ TagManager:
   - FxTemporaire
   - Orange
   - DamageHit
+  - MagicHit
   layers:
   - Default
   - TransparentFX

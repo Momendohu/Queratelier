@@ -16,10 +16,6 @@ public class Orange : MonoBehaviour {
 	}
 
 	private void Start () {
-        Destroy(this.gameObject,destroyTime);
-	}
-	
-	private void Update () {
-		
+        //Destroy(this.gameObject,destroyTime);
 	}
 }
