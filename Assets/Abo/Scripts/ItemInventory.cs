@@ -573,13 +573,17 @@ public class ItemInventory : MonoBehaviour {
     /// アイテムを使用する
     /// </summary>
     private void UseItem () {
+        //いまもと追加部分
+        ScoreManager scoremanager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+
+
         for(int i = 0;i < selectedItem.Length;i++) {
             if(selectedItem[i] != -1) {
                 holdItemNum[selectedItem[i]]--;
             }
         }
 
-        if(/*!GameObject.Find("Player").GetComponent<Player>().ItemStorable*/true) {
+        if(!GameObject.Find("Player").GetComponent<Player>().ItemStorable) {
             GameObject player = GameObject.Find("Player");
             GameObject generateObj = null;
             switch(ChangeSelectedItemToItemID(selectedItem)) {
@@ -659,6 +663,7 @@ public class ItemInventory : MonoBehaviour {
             for(int i = 0;i < selectedItem.Length;i++) {
                 if(selectedItem[i] != -1) {
                     //アイテムをアトリエに貯蔵する
+                    scoremanager.ReciveItem(selectedItem[i]);
                 }
             }
         }
