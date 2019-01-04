@@ -579,80 +579,88 @@ public class ItemInventory : MonoBehaviour {
             }
         }
 
-        GameObject player = GameObject.Find("Player");
-        GameObject generateObj = null;
-        switch(ChangeSelectedItemToItemID(selectedItem)) {
-            case (int)ItemID.NONE:
-            break;
+        if(/*!GameObject.Find("Player").GetComponent<Player>().ItemStorable*/true) {
+            GameObject player = GameObject.Find("Player");
+            GameObject generateObj = null;
+            switch(ChangeSelectedItemToItemID(selectedItem)) {
+                case (int)ItemID.NONE:
+                break;
 
-            case (int)ItemID.MAGIC:
-            GameObject obj = CreateItem((int)ItemID.MAGIC,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
-            break;
+                case (int)ItemID.MAGIC:
+                GameObject obj = CreateItem((int)ItemID.MAGIC,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+                break;
 
-            case (int)ItemID.ORANGE:
-            generateObj = CreateItem((int)ItemID.ORANGE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
-            generateObj.transform.eulerAngles = player.transform.eulerAngles;
-            break;
+                case (int)ItemID.ORANGE:
+                generateObj = CreateItem((int)ItemID.ORANGE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+                generateObj.transform.eulerAngles = player.transform.eulerAngles;
+                break;
 
-            case (int)ItemID.WALL:
-            generateObj = CreateItem((int)ItemID.WALL,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
-            generateObj.transform.eulerAngles = player.transform.eulerAngles;
-            break;
+                case (int)ItemID.WALL:
+                generateObj = CreateItem((int)ItemID.WALL,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+                generateObj.transform.eulerAngles = player.transform.eulerAngles;
+                break;
 
-            case (int)ItemID.GRENADE:
-            generateObj = CreateItem((int)ItemID.GRENADE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 1);
-            generateObj.transform.eulerAngles = player.transform.eulerAngles;
-            generateObj.GetComponent<Grenade>().AddSpeed((GetForwardPosFromRotate(player.transform.eulerAngles) + Vector3.up) * 5);
-            break;
+                case (int)ItemID.GRENADE:
+                generateObj = CreateItem((int)ItemID.GRENADE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 1);
+                generateObj.transform.eulerAngles = player.transform.eulerAngles;
+                generateObj.GetComponent<Grenade>().AddSpeed((GetForwardPosFromRotate(player.transform.eulerAngles) + Vector3.up) * 5);
+                break;
 
-            //00
-            case (int)ItemID.MAGIC_MAGIC:
-            break;
+                //00
+                case (int)ItemID.MAGIC_MAGIC:
+                break;
 
-            //01
-            case (int)ItemID.MAGIC_ORANGE:
-            case (int)ItemID.ORANGE_MAGIC:
-            break;
+                //01
+                case (int)ItemID.MAGIC_ORANGE:
+                case (int)ItemID.ORANGE_MAGIC:
+                break;
 
-            //02
-            case (int)ItemID.MAGIC_WALL:
-            case (int)ItemID.WALL_MAGIC:
-            break;
+                //02
+                case (int)ItemID.MAGIC_WALL:
+                case (int)ItemID.WALL_MAGIC:
+                break;
 
-            //03
-            case (int)ItemID.MAGIC_GRENADE:
-            case (int)ItemID.GRENADE_MAGIC:
-            break;
+                //03
+                case (int)ItemID.MAGIC_GRENADE:
+                case (int)ItemID.GRENADE_MAGIC:
+                break;
 
-            //11
-            case (int)ItemID.ORANGE_ORANGE:
-            break;
+                //11
+                case (int)ItemID.ORANGE_ORANGE:
+                break;
 
-            //12
-            case (int)ItemID.ORANGE_WALL:
-            case (int)ItemID.WALL_ORANGE:
-            break;
+                //12
+                case (int)ItemID.ORANGE_WALL:
+                case (int)ItemID.WALL_ORANGE:
+                break;
 
-            //13
-            case (int)ItemID.ORANGE_GRENADE:
-            case (int)ItemID.GRENADE_ORANGE:
-            break;
+                //13
+                case (int)ItemID.ORANGE_GRENADE:
+                case (int)ItemID.GRENADE_ORANGE:
+                break;
 
-            //22
-            case (int)ItemID.WALL_WALL:
-            break;
+                //22
+                case (int)ItemID.WALL_WALL:
+                break;
 
-            //23
-            case (int)ItemID.WALL_GRENADE:
-            case (int)ItemID.GRENADE_WALL:
-            break;
+                //23
+                case (int)ItemID.WALL_GRENADE:
+                case (int)ItemID.GRENADE_WALL:
+                break;
 
-            //33
-            case (int)ItemID.GRENADE_GRENADE:
-            break;
+                //33
+                case (int)ItemID.GRENADE_GRENADE:
+                break;
 
-            default:
-            break;
+                default:
+                break;
+            }
+        } else {
+            for(int i = 0;i < selectedItem.Length;i++) {
+                if(selectedItem[i] != -1) {
+                    //アイテムをアトリエに貯蔵する
+                }
+            }
         }
     }
 
