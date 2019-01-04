@@ -44,7 +44,15 @@ public class EnemyBase : MonoBehaviour {
         if (hp <= 0) Destroy(this.gameObject);
     }
 
-    //衝突判定
+    protected void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Magic")
+        {
+            EnemyWarp_CreatePoint();
+        }
+    }
+
+    //衝突維持判定
     protected void OnCollisionStay(Collision collision)
     {
         GameObject Atelier = GameObject.FindGameObjectWithTag("Atelier");
@@ -80,6 +88,8 @@ public class EnemyBase : MonoBehaviour {
 
     protected void EnemyWarp_CreatePoint()
     {
-        Debug.Log("");
+        Debug.Log("ワープ成功");
+
+        this.transform.position = new Vector3(0, 0, 0);
     }
 }
