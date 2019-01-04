@@ -77,4 +77,9 @@ public class EnemyBase : MonoBehaviour {
             }
         }
     }
+
+    protected void EnemyWarp_CreatePoint()
+    {
+        Debug.Log("");
+    }
 }
