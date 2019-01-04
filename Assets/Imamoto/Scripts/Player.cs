@@ -99,7 +99,7 @@ public class Player : MonoBehaviour {
         shotInterval += Time.deltaTime;
         damageInterval += Time.deltaTime;
 
-        Debug.Log(ItemStorable);
+        //Debug.Log(ItemStorable);
 
 	}
 

@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(ItemSum[0] + " " + ItemSum[1] + " " + ItemSum[2] + " " + ItemSum[3]);
+        //Debug.Log(ItemSum[0] + " " + ItemSum[1] + " " + ItemSum[2] + " " + ItemSum[3]);
 	}
 
     public void ReciveItem(int ItemId)
