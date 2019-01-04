@@ -40,6 +40,12 @@ public class EnemyBase : MonoBehaviour {
         {
             hp--;
         }
+        else if (other.tag == "DamageHit")
+        {
+            //ノックバック追加
+            hp -= 10;
+            Debug.Log("bomb");
+        }
 
         if (hp <= 0) Destroy(this.gameObject);
     }
@@ -50,6 +56,7 @@ public class EnemyBase : MonoBehaviour {
         {
             EnemyWarp_CreatePoint();
         }
+
     }
 
     //衝突維持判定
