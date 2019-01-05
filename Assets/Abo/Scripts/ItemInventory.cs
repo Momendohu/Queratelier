@@ -31,6 +31,7 @@ public class ItemInventory : MonoBehaviour {
     private float movingSpeed = 0.3f; //移動スピード
 
     private bool onceSwitchIndex = false; //指示してるボックスが変更された時いちどだけ呼び出すフラグ
+    private int itemLiveTimeLength = 10; //アイテムが生きている時間
 
     private int[] selectedItem = { -1,-1 }; //選択したアイテム
 
@@ -579,32 +580,37 @@ public class ItemInventory : MonoBehaviour {
             }
         }
 
+        GameObject player = GameObject.Find("Player");
+
         //if(true) {
-        if(!GameObject.Find("Player").GetComponent<Player>().ItemStorable) {
-            GameObject player = GameObject.Find("Player");
+        if(!player.GetComponent<Player>().ItemStorable) {
             GameObject generateObj = null;
             switch(ChangeSelectedItemToItemID(selectedItem)) {
                 case (int)ItemID.NONE:
                 break;
 
                 case (int)ItemID.MAGIC:
-                GameObject obj = CreateItem((int)ItemID.MAGIC,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+                generateObj = CreateItem((int)ItemID.MAGIC,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+                Destroy(generateObj,itemLiveTimeLength);
                 break;
 
                 case (int)ItemID.ORANGE:
                 generateObj = CreateItem((int)ItemID.ORANGE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
                 generateObj.transform.eulerAngles = player.transform.eulerAngles;
+                Destroy(generateObj,itemLiveTimeLength);
                 break;
 
                 case (int)ItemID.WALL:
                 generateObj = CreateItem((int)ItemID.WALL,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
                 generateObj.transform.eulerAngles = player.transform.eulerAngles;
+                Destroy(generateObj,itemLiveTimeLength);
                 break;
 
                 case (int)ItemID.GRENADE:
                 generateObj = CreateItem((int)ItemID.GRENADE,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 1);
                 generateObj.transform.eulerAngles = player.transform.eulerAngles;
                 generateObj.GetComponent<Grenade>().AddSpeed((GetForwardPosFromRotate(player.transform.eulerAngles) + Vector3.up) * 5);
+                Destroy(generateObj,itemLiveTimeLength);
                 break;
 
                 //00
@@ -626,6 +632,7 @@ public class ItemInventory : MonoBehaviour {
                 case (int)ItemID.GRENADE_MAGIC:
                 generateObj = CreateItem(6,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
                 generateObj.transform.eulerAngles = player.transform.eulerAngles;
+                Destroy(generateObj,itemLiveTimeLength);
                 break;
 
                 //11
