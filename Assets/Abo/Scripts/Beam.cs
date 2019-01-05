@@ -18,11 +18,11 @@ public class Beam : MonoBehaviour {
     void OnParticleTrigger () {
         int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter,enter);
 
-        for(int i = 0;i < numEnter;i++) {
+        /*for(int i = 0;i < numEnter;i++) {
             ParticleSystem.Particle p = enter[i];
             p.startLifetime = 0;
             enter[i] = p;
-        }
+        }*/
 
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter,enter);
     }
