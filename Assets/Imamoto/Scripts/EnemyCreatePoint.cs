@@ -78,7 +78,7 @@ public class EnemyCreatePoint : MonoBehaviour {
             EnemyInstantiate(NowWaveList);
         }
 
-        Debug.Log(EnemyCreateflg);
+        //Debug.Log(EnemyCreateflg);
     }
 
     private void EnemyInstantiate(List<EnemyList> NowList)

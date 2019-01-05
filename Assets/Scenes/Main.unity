@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 30749895}
   m_Layer: 0
   m_Name: EnemyCreatePoint_RIGHT
-  m_TagString: Untagged
+  m_TagString: EnemyCreatePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 1187435475}
   m_Layer: 0
   m_Name: EnemyCreatePoint_LEFT
-  m_TagString: Untagged
+  m_TagString: EnemyCreatePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 1312143269}
   m_Layer: 0
   m_Name: EnemyCreatePoint_UNDER
-  m_TagString: Untagged
+  m_TagString: EnemyCreatePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -796,7 +796,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8f51ad489cdb57e4dbbda9fa3c793c99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

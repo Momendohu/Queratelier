@@ -26,7 +26,7 @@ public class WaveManager : MonoBehaviour {
             NowWave++;
             WaveTime = 0;
             Wave_EnemySumIndex++;
-            Debug.Log(NowWave);
+            //Debug.Log(NowWave);
         }
 	}
 

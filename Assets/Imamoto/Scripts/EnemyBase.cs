@@ -11,7 +11,9 @@ public class EnemyBase : MonoBehaviour {
     public float speed;
     public string charaName;
     public string CreatePoint;
+
     private bool NowAttack = false;
+    private bool OrangeExistance = false;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +29,18 @@ public class EnemyBase : MonoBehaviour {
     //ターゲットのタグが引数
     public void MoveToTarget(string target_name)
     {
-        GameObject target = GameObject.FindGameObjectWithTag(target_name) as GameObject;
+        GameObject target = null;
+
+        if (OrangeExistance)
+        {
+
+        }
+            else if (OrangeExistance == false)
+        {
+            target = GameObject.FindGameObjectWithTag(target_name) as GameObject;
+        }
+        
+
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
         agent.destination = target.transform.position;
@@ -140,6 +153,11 @@ public class EnemyBase : MonoBehaviour {
         }
     }
 
+    protected void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("衝突");
+    }
+
     protected void EnemyWarp_CreatePoint(string CreatePoint_argument)
     {
         //Debug.Log("ワープ成功");
@@ -166,5 +184,41 @@ public class EnemyBase : MonoBehaviour {
         }
 
         this.transform.position = CreatePointObject.transform.position;
+    }
+
+    public void NearOrangeSearchFunction()
+    {
+
+    }
+
+    private IEnumerator NearOrangeSearchCoroutine()
+    {
+        GameObject nearOrange = null;
+        float minDis = 1000f;
+        float dis = 0;
+
+        GameObject[] Oranges = GameObject.FindGameObjectsWithTag("Orange");
+
+        foreach (GameObject Orange in Oranges)
+        {
+            dis = Vector3.Distance(transform.position, Orange.transform.position);
+            if (dis < minDis)
+            {
+                minDis = dis;
+                nearOrange = Orange;
+            }
+        }
+
+        if(dis <= 30)
+        {
+            OrangeExistance = true;
+            yield return nearOrange;
+        }
+        else
+        {
+            OrangeExistance = false;
+        }
+
+        yield return new WaitForSeconds(1.0f);
     }
 }
