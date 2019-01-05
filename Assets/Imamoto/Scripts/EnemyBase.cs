@@ -42,6 +42,8 @@ public class EnemyBase : MonoBehaviour {
     //弾との衝突時
     protected void OnTriggerEnter(Collider other)
     {
+        WaveManager WaveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+
         if (other.tag == "Bullet")
         {
             hp--;
@@ -56,7 +58,11 @@ public class EnemyBase : MonoBehaviour {
             EnemyWarp_CreatePoint();
         }
 
-        if (hp <= 0) Destroy(this.gameObject);
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject);
+            WaveManager.ReciveDestroyEnemySum();
+        }
     }
 
     protected void OnCollisionEnter(Collision collision)

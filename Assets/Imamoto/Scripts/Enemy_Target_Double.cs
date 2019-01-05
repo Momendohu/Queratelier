@@ -12,6 +12,8 @@ public class Enemy_Target_Double : EnemyBase{
         hp = 10;
         speed = 5.0f;
         charaName = "2";
+
+        player = GameObject.Find("Player");
     }
 	
 	// Update is called once per frame

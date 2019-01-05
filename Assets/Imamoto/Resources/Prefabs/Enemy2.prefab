@@ -157,6 +157,7 @@ MonoBehaviour:
   hp: 0
   speed: 0
   charaName: 
+  CreatePoint: 
   player: {fileID: 0}
 --- !u!195 &195346889652555404
 NavMeshAgent:

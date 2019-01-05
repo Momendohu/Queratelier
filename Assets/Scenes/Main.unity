@@ -121,6 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 30749896}
+  - component: {fileID: 30749895}
   m_Layer: 0
   m_Name: EnemyCreatePoint_RIGHT
   m_TagString: Untagged
@@ -128,6 +129,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &30749895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 30749894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cea1437d0bb4a4cb4b7c58533e3dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wave1_EnemyList:
+  - List: 000000000000000001000000
+  Wave2_EnemyList:
+  - List: 000000000000000001000000
+  Wave3_EnemyList:
+  - List: 000000000000000001000000
+  Andy: {fileID: 1553974674892544, guid: e1e63a12d3939da4face6de5f023c89b, type: 2}
+  Bob: {fileID: 1146240778993622, guid: 9786e2bcc41223b4fa7801b517398001, type: 2}
+  Mac: {fileID: 1356360585839402, guid: 5b337fc475d1c8b4a99cbc02c4d0d766, type: 2}
+  Cacy: {fileID: 0}
+  Helen: {fileID: 0}
 --- !u!4 &30749896
 Transform:
   m_ObjectHideFlags: 0
@@ -135,7 +158,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 30749894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 132, y: -9.4, z: -10}
+  m_LocalPosition: {x: 132, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -169,13 +192,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Wave1_EnemyList:
-  - List: 000000000000000002000000
-  - List: 050000000000000003000000
+  - List: 000000000000000001000000
   Wave2_EnemyList:
-  - List: 
-  - List: 
-  - List: 
-  Wave3_EnemyList: []
+  - List: 000000000000000001000000
+  Wave3_EnemyList:
+  - List: 000000000000000001000000
   Andy: {fileID: 1553974674892544, guid: e1e63a12d3939da4face6de5f023c89b, type: 2}
   Bob: {fileID: 1146240778993622, guid: 9786e2bcc41223b4fa7801b517398001, type: 2}
   Mac: {fileID: 1356360585839402, guid: 5b337fc475d1c8b4a99cbc02c4d0d766, type: 2}
@@ -422,6 +443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1187435476}
+  - component: {fileID: 1187435475}
   m_Layer: 0
   m_Name: EnemyCreatePoint_LEFT
   m_TagString: Untagged
@@ -429,6 +451,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1187435475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1187435474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cea1437d0bb4a4cb4b7c58533e3dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wave1_EnemyList:
+  - List: 000000000100000001000000
+  Wave2_EnemyList:
+  - List: 000000000000000001000000
+  Wave3_EnemyList:
+  - List: 000000000000000001000000
+  Andy: {fileID: 1553974674892544, guid: e1e63a12d3939da4face6de5f023c89b, type: 2}
+  Bob: {fileID: 1146240778993622, guid: 9786e2bcc41223b4fa7801b517398001, type: 2}
+  Mac: {fileID: 1356360585839402, guid: 5b337fc475d1c8b4a99cbc02c4d0d766, type: 2}
+  Cacy: {fileID: 0}
+  Helen: {fileID: 0}
 --- !u!4 &1187435476
 Transform:
   m_ObjectHideFlags: 0
@@ -436,7 +480,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1187435474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -133, y: -9.4, z: -8}
+  m_LocalPosition: {x: -133, y: 2, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -657,6 +701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1312143270}
+  - component: {fileID: 1312143269}
   m_Layer: 0
   m_Name: EnemyCreatePoint_UNDER
   m_TagString: Untagged
@@ -664,6 +709,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1312143269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1312143268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cea1437d0bb4a4cb4b7c58533e3dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wave1_EnemyList:
+  - List: 000000000000000001000000
+  Wave2_EnemyList:
+  - List: 000000000000000001000000
+  Wave3_EnemyList:
+  - List: 000000000000000001000000
+  Andy: {fileID: 1553974674892544, guid: e1e63a12d3939da4face6de5f023c89b, type: 2}
+  Bob: {fileID: 1146240778993622, guid: 9786e2bcc41223b4fa7801b517398001, type: 2}
+  Mac: {fileID: 1356360585839402, guid: 5b337fc475d1c8b4a99cbc02c4d0d766, type: 2}
+  Cacy: {fileID: 0}
+  Helen: {fileID: 0}
 --- !u!4 &1312143270
 Transform:
   m_ObjectHideFlags: 0
@@ -671,7 +738,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1312143268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.2, y: -9.4, z: -139}
+  m_LocalPosition: {x: 9.2, y: 2, z: -139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -818,7 +885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cabf1ed7912f7f4aabbeb26ad626783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wave_EnemySum: 000000000000000000000000
+  Wave_EnemySum: 040000000400000004000000
 --- !u!4 &1657059957
 Transform:
   m_ObjectHideFlags: 0

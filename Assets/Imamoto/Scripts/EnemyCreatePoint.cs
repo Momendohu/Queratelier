@@ -27,6 +27,7 @@ public class EnemyCreatePoint : MonoBehaviour {
     private float NowWaveTime = 0;
     private int EnemyListIndex = 0;
     private bool EnemyCreateflg = false;
+    private List<EnemyList> NowWaveList;
 
     public GameObject Andy;
     public GameObject Bob;
@@ -41,7 +42,12 @@ public class EnemyCreatePoint : MonoBehaviour {
         wavemanager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
 
         NowWave = wavemanager.GetNowWave();
-        EnemyCreateflg = true;
+        NowWaveList = Wave1_EnemyList;
+
+        if (Wave1_EnemyList.Count >= -1)
+        {
+            EnemyCreateflg = true;
+        }
 	}
 	
 	// Update is called once per frame
@@ -51,14 +57,28 @@ public class EnemyCreatePoint : MonoBehaviour {
         {
             NowWave = wavemanager.GetNowWave();
             EnemyCreateflg = true;
+            EnemyListIndex = 0;
+
+            if(NowWaveList == Wave1_EnemyList)
+            {
+                NowWaveList = Wave2_EnemyList;
+                //Debug.Log("Wave2リストに変更");
+            }
+            else if(NowWaveList == Wave2_EnemyList)
+            {
+                NowWaveList = Wave3_EnemyList;
+                //Debug.Log("Wave3リストに変更");
+            }
         }
 
         NowWaveTime = wavemanager.GetWaveTimer();
 
         if (EnemyCreateflg)
         {
-            EnemyInstantiate(Wave1_EnemyList);
+            EnemyInstantiate(NowWaveList);
         }
+
+        Debug.Log(EnemyCreateflg);
     }
 
     private void EnemyInstantiate(List<EnemyList> NowList)
@@ -108,7 +128,7 @@ public class EnemyCreatePoint : MonoBehaviour {
                 EnemyCreateflg = false;
             }
         }
-        Debug.Log(EnemyListIndex);
-        Debug.Log(NowList.Count);
+        //Debug.Log(EnemyListIndex);
+        //Debug.Log(NowList.Count);
     }
 }
