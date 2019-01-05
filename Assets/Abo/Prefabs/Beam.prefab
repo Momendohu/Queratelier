@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234885870237114}
   - component: {fileID: 198486131584067456}
+  - component: {fileID: 114144614468493696}
   - component: {fileID: 199488127815898200}
   m_Layer: 0
   m_Name: Beam
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114144614468493696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683057350293132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b388ad4f6c7e0e4baac20e25a47de57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198486131584067456
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3628,9 +3640,12 @@ ParticleSystem:
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
-    collisionShape0: {fileID: 0}
-    collisionShape1: {fileID: 0}
-    collisionShape2: {fileID: 0}
+    collisionShape0: {fileID: 4256408251730956, guid: e1e63a12d3939da4face6de5f023c89b,
+      type: 2}
+    collisionShape1: {fileID: 4966362992808526, guid: 9786e2bcc41223b4fa7801b517398001,
+      type: 2}
+    collisionShape2: {fileID: 4985317572680560, guid: 5b337fc475d1c8b4a99cbc02c4d0d766,
+      type: 2}
     collisionShape3: {fileID: 0}
     collisionShape4: {fileID: 0}
     collisionShape5: {fileID: 0}

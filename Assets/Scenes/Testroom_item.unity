@@ -276,11 +276,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 329614860}
     m_Modifications:
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 224997053301343018, guid: da36d8d7070a39f43b3a4abb4f6df262,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -371,42 +366,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df,
-        type: 2}
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df,
-        type: 2}
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.data[8]
-      value: 
-      objectReference: {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df,
-        type: 2}
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.data[9]
-      value: 
-      objectReference: {fileID: 1683057350293132, guid: 83a365209b8928543a83e957d2001746,
-        type: 2}
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.data[10]
-      value: 
-      objectReference: {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df,
-        type: 2}
-    - target: {fileID: 114154161446204350, guid: da36d8d7070a39f43b3a4abb4f6df262,
-        type: 2}
-      propertyPath: ItemPrefabs.Array.data[11]
-      value: 
-      objectReference: {fileID: 1742172662824994, guid: ff1fae761364f1a4b9cae6a424f300df,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da36d8d7070a39f43b3a4abb4f6df262, type: 2}
   m_IsPrefabAsset: 0
