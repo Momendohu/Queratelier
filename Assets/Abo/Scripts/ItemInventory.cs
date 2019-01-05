@@ -573,16 +573,13 @@ public class ItemInventory : MonoBehaviour {
     /// アイテムを使用する
     /// </summary>
     private void UseItem () {
-        //いまもと追加部分
-        ScoreManager scoremanager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-
-
         for(int i = 0;i < selectedItem.Length;i++) {
             if(selectedItem[i] != -1) {
                 holdItemNum[selectedItem[i]]--;
             }
         }
 
+        //if(true) {
         if(!GameObject.Find("Player").GetComponent<Player>().ItemStorable) {
             GameObject player = GameObject.Find("Player");
             GameObject generateObj = null;
@@ -627,6 +624,8 @@ public class ItemInventory : MonoBehaviour {
                 //03
                 case (int)ItemID.MAGIC_GRENADE:
                 case (int)ItemID.GRENADE_MAGIC:
+                generateObj = CreateItem(6,player.transform.position + GetForwardPosFromRotate(player.transform.eulerAngles) * 3);
+                generateObj.transform.eulerAngles = player.transform.eulerAngles;
                 break;
 
                 //11
@@ -660,6 +659,9 @@ public class ItemInventory : MonoBehaviour {
                 break;
             }
         } else {
+            //いまもと追加部分
+            ScoreManager scoremanager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+
             for(int i = 0;i < selectedItem.Length;i++) {
                 if(selectedItem[i] != -1) {
                     //アイテムをアトリエに貯蔵する
