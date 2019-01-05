@@ -26,6 +26,7 @@ public class EnemyCreatePoint : MonoBehaviour {
     private int NowWave = 0;
     private float NowWaveTime = 0;
     private int EnemyListIndex = 0;
+    private bool EnemyCreateflg = false;
 
     public GameObject Andy;
     public GameObject Bob;
@@ -38,18 +39,31 @@ public class EnemyCreatePoint : MonoBehaviour {
     // Use this for initialization
     void Start () {
         wavemanager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+
+        NowWave = wavemanager.GetNowWave();
+        EnemyCreateflg = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        NowWave = wavemanager.GetNowWave();
+        //ウェーブが変わった判定
+        if (NowWave != wavemanager.GetNowWave())
+        {
+            NowWave = wavemanager.GetNowWave();
+            EnemyCreateflg = true;
+        }
+
         NowWaveTime = wavemanager.GetWaveTimer();
 
-        //EnemyInstantiate(Wave1_EnemyList);
+        if (EnemyCreateflg)
+        {
+            EnemyInstantiate(Wave1_EnemyList);
+        }
     }
 
     private void EnemyInstantiate(List<EnemyList> NowList)
     {
+
         if(NowList[EnemyListIndex].List[0] <= NowWaveTime)
         {
             switch (NowList[EnemyListIndex].List[1])
@@ -85,9 +99,13 @@ public class EnemyCreatePoint : MonoBehaviour {
                     Debug.Log("エラー　未定義のエネミー呼び出し");
                     break;
             }
-            if (NowList.Count >= EnemyListIndex + 1)
+            if (NowList.Count >= EnemyListIndex + 2)
             {
                 EnemyListIndex++;
+            }
+            else
+            {
+                EnemyCreateflg = false;
             }
         }
         Debug.Log(EnemyListIndex);

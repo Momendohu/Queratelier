@@ -10,6 +10,7 @@ public class EnemyBase : MonoBehaviour {
     public float hp;
     public float speed;
     public string charaName;
+    public string CreatePoint;
     private bool NowAttack = false;
 
 	// Use this for initialization
@@ -30,6 +31,11 @@ public class EnemyBase : MonoBehaviour {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
         agent.destination = target.transform.position;
+    }
+
+    public void SearchCreatePoint()
+    {
+        CreatePoint = "";
     }
 
     //要改良
