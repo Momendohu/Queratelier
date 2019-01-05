@@ -33,9 +33,45 @@ public class EnemyBase : MonoBehaviour {
         agent.destination = target.transform.position;
     }
 
-    public void SearchCreatePoint()
+    //初期出現位置探索関数
+    //使用する場所は、エネミー生成時のスタートで使用を想定
+    public string SearchEnemyCreatePoint()
     {
-        CreatePoint = "";
+        GameObject nearCreatePoint = null;
+        float minDis = 1000f;
+
+        GameObject[] CreatePoints = GameObject.FindGameObjectsWithTag("EnemyCreatePoint");
+
+        foreach(GameObject Point in CreatePoints)
+        {
+            float dis = Vector3.Distance(transform.position,Point.transform.position);
+            if(dis < minDis)
+            {
+                minDis = dis;
+                nearCreatePoint = Point;
+            }
+        }
+
+        switch (nearCreatePoint.name)
+        {
+            case "EnemyCreatePoint_UP":
+                CreatePoint = "UP";
+                break;
+
+            case "EnemyCreatePoint_UNDER":
+                CreatePoint = "UNDER";
+                break;
+
+            case "EnemyCreatePoint_RIGHT":
+                CreatePoint = "RIGHT";
+                break;
+
+            case "EnemyCreatePoint_LEFT":
+                CreatePoint = "LEFT";
+                break;
+        }
+
+        return CreatePoint;
     }
 
     //要改良
@@ -55,7 +91,7 @@ public class EnemyBase : MonoBehaviour {
             Debug.Log("bomb");
         }else if (other.tag == "MagicHit")
         {
-            EnemyWarp_CreatePoint();
+            EnemyWarp_CreatePoint(this.CreatePoint);
         }
 
         if (hp <= 0)
@@ -104,10 +140,31 @@ public class EnemyBase : MonoBehaviour {
         }
     }
 
-    protected void EnemyWarp_CreatePoint()
+    protected void EnemyWarp_CreatePoint(string CreatePoint_argument)
     {
-        Debug.Log("ワープ成功");
+        //Debug.Log("ワープ成功");
+        //this.transform.position = new Vector3(0, 0, 0);
+        GameObject CreatePointObject = null;
 
-        this.transform.position = new Vector3(0, 0, 0);
+        switch (CreatePoint_argument)
+        {
+            case "UP":
+                CreatePointObject = GameObject.Find("EnemyCreatePoint_UP");
+                break;
+
+            case "UNDER":
+                CreatePointObject = GameObject.Find("EnemyCreatePoint_UNDER");
+                break;
+
+            case "RIGHT":
+                CreatePointObject = GameObject.Find("EnemyCreatePoint_RIGHT");
+                break;
+
+            case "LEFT":
+                CreatePointObject = GameObject.Find("EnemyCreatePoint_LEFT");
+                break;
+        }
+
+        this.transform.position = CreatePointObject.transform.position;
     }
 }

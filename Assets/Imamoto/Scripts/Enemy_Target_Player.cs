@@ -9,6 +9,7 @@ public class Enemy_Target_Player : EnemyBase {
         hp = 10;
         speed = 5.0f;
         charaName = "3";
+        CreatePoint = SearchEnemyCreatePoint();
     }
 	
 	// Update is called once per frame
