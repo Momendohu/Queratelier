@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 195933429884078008}
   - component: {fileID: 114793946618515602}
   - component: {fileID: 54491193632483420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33221868762622526}
   - component: {fileID: 23641644698609672}
   - component: {fileID: 65999058818550718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,6 +157,7 @@ MonoBehaviour:
   hp: 0
   speed: 0
   charaName: 
+  CreatePoint: 
 --- !u!195 &195933429884078008
 NavMeshAgent:
   m_ObjectHideFlags: 1

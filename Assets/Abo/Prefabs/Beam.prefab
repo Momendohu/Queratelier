@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4234885870237114}
   - component: {fileID: 198486131584067456}
-  - component: {fileID: 114144614468493696}
   - component: {fileID: 199488127815898200}
   m_Layer: 0
   m_Name: Beam
@@ -42,17 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114144614468493696
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1683057350293132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b388ad4f6c7e0e4baac20e25a47de57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &198486131584067456
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3631,7 +3619,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 256
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
