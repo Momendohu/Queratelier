@@ -3627,7 +3627,7 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 0
+    enabled: 1
     collisionShape0: {fileID: 4256408251730956, guid: e1e63a12d3939da4face6de5f023c89b,
       type: 2}
     collisionShape1: {fileID: 4966362992808526, guid: 9786e2bcc41223b4fa7801b517398001,
