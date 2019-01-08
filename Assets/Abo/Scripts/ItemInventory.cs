@@ -122,8 +122,6 @@ public class ItemInventory : MonoBehaviour {
     }
 
     private void Start () {
-        AudioManager.Instance.PlayBGM("bgm1");
-
         //基準の位置の更新
         basePos = baseDisplayObject.GetComponent<RectTransform>().localPosition;
     }

@@ -10,7 +10,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour {
                 instance = (T)FindObjectOfType(typeof(T));
 
                 if(instance == null) {
-                    Debug.LogError(typeof(T) + "がそもそもないよ");
+                    ErrorManager.ErrorLog(ErrorManager.ERROR_CODE.SYSTEM_SINGLETON_OBJECT_NONE);
                 }
             }
 

@@ -6,8 +6,9 @@ using UnityEngine;
 public static class ErrorManager {
     public enum ERROR_CODE {
         NONE = 0,
-        AUDIO_SE_NONE = 1,
-        AUDIO_BGM_NONE = 101,
+        SYSTEM_SINGLETON_OBJECT_NONE = 1,
+        AUDIO_SE_NONE = 101,
+        AUDIO_BGM_NONE = 201,
     }
 
     /// <summary>
@@ -18,6 +19,10 @@ public static class ErrorManager {
         switch(code) {
             case ERROR_CODE.NONE:
             str = "no message";
+            break;
+
+            case ERROR_CODE.SYSTEM_SINGLETON_OBJECT_NONE:
+            str = "シングルトンオブジェクト未検地";
             break;
 
             case ERROR_CODE.AUDIO_SE_NONE:
